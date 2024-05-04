@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.example.Odooraa.entities;
 
 public enum UserType {
     CLIENT,

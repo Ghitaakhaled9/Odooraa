@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.example.Odooraa.entities;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +16,7 @@ import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Entity
 @Data
