@@ -1,6 +1,6 @@
-package com.example.demo.Repository;
+package com.example.Odooraa.Repository;
 
-import com.example.demo.entities.Commande;
+import com.example.Odooraa.entities.Commande;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CommandeRepository extends JpaRepository<Commande, Long> {

@@ -1,7 +1,8 @@
-package com.example.demo.Service;
+package com.example.Odooraa.Service;
 
-import com.example.demo.Repository.ProduitRepository;
-import com.example.demo.entities.Produit;
+
+import com.example.Odooraa.Repository.ProduitRepository;
+import com.example.Odooraa.entities.Produit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

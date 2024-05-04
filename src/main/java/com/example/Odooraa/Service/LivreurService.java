@@ -1,7 +1,8 @@
-package com.example.demo.Service;
+package com.example.Odooraa.Service;
 
-import com.example.demo.Repository.LivreurRepository;
-import com.example.demo.entities.Livreur;
+
+import com.example.Odooraa.Repository.LivreurRepository;
+import com.example.Odooraa.entities.Livreur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

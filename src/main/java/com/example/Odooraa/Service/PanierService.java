@@ -1,7 +1,8 @@
-package com.example.demo.Service;
+package com.example.Odooraa.Service;
 
-import com.example.demo.Repository.PanierRepository;
-import com.example.demo.entities.Panier;
+
+import com.example.Odooraa.Repository.PanierRepository;
+import com.example.Odooraa.entities.Panier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
