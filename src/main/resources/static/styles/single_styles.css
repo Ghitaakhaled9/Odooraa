@@ -1496,12 +1496,7 @@ section
 	font-weight: 400;
 	color: #b9b4c7 !important;
 }
-::input-placeholder
-{
-	font-size: 14px !important;
-	font-weight: 400;
-	color: #b9b4c7 !important;
-}
+
 .newsletter_submit_btn
 {
 	width: 160px;
