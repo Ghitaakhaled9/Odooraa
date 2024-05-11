@@ -32,6 +32,6 @@ public class Produit {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserSite user;
 
 }

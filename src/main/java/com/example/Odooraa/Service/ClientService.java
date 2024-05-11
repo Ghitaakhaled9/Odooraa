@@ -1,7 +1,7 @@
 package com.example.Odooraa.Service;
 
 import com.example.Odooraa.Repository.ClientRepository;
-import com.example.Odooraa.entities.User;
+import com.example.Odooraa.entities.UserSite;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +19,20 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public List<User> getAllClients() {
+    public List<UserSite> getAllClients() {
         return clientRepository.findAll();
     }
 
-    public User getClientById(Long id) {
+    public UserSite getClientById(Long id) {
         return clientRepository.findById(id).orElse(null);
     }
 
-    public User createClient(User client) {
+    public UserSite createClient(UserSite client) {
         return clientRepository.save(client);
     }
 
-    public User updateClient(Long id, User clientDetails) {
-        User client = clientRepository.findById(id).orElse(null);
+    public UserSite updateClient(Long id, UserSite clientDetails) {
+        UserSite client = clientRepository.findById(id).orElse(null);
         if (client != null) {
             client.setUsername(clientDetails.getUsername());
             // Set other fields as needed

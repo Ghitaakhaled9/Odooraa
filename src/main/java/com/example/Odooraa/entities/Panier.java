@@ -26,7 +26,7 @@ public class Panier {
     private String date;
 
     @OneToOne(mappedBy = "panier")
-    private User user;
+    private UserSite user;
 
     @ManyToMany
     @JoinTable(name = "panier_produit", joinColumns = @JoinColumn(name = "panier_id"), inverseJoinColumns = @JoinColumn(name = "produit_id"))

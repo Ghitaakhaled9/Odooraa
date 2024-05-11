@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @PrimaryKeyJoinColumn(name = "user_id")
-public class User {
+public class UserSite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +44,7 @@ public class User {
 
     private String username;
     private String password;
-    private String sexe;
+    private sexe sexe;
     private String adresse;
     private String tel;
     private String email;
