@@ -25,7 +25,7 @@ public class LoginController {
     public String login(@RequestParam("email") String email,
                         @RequestParam("password") String password,
                         RedirectAttributes redirectAttributes) {
-        System.out.println("1");
+
         // Retrieve user by email from the database
         UserSite user = userRepository.findByEmail(email);
         System.out.println(user.getType());
@@ -34,10 +34,13 @@ public class LoginController {
             // Check if the user is an admin
             if (user.getType() == UserType.ADMIN) {
                 // Redirect to admin dashboard
-                return "redirect:/admin/dashboard";
-            } else {
-                // Redirect to user dashboard
-                return "redirect:/user/dashboard";
+                return "redirect:/dashbord";
+            } else if (user.getType() == UserType.GERANT){
+
+                return "redirect:/index";
+            }
+            else {
+                return "redirect:/index";
             }
         } else {
             // Redirect back to login page with error message
@@ -46,15 +49,9 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/admin/dashboard")
+    @GetMapping("/dashbord")
     public String showAdminDashboard(Model model) {
-        // Add any necessary data to the admin dashboard
-        return "dashboard"; // Assuming you have an admin_dashboard.html file in your templates directory
+        return "dashbord";
     }
 
-    @GetMapping("/user/dashboard")
-    public String showUserDashboard(Model model) {
-        // Add any necessary data to the user dashboard
-        return "index"; // Assuming you have a user_dashboard.html file in your templates directory
-    }
 }
