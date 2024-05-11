@@ -49,9 +49,6 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/dashbord")
-    public String showAdminDashboard(Model model) {
-        return "dashbord";
-    }
+
 
 }
