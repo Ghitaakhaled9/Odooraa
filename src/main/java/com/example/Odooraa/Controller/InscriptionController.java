@@ -7,7 +7,7 @@ import com.example.Odooraa.entities.UserType;
 import com.example.Odooraa.entities.sexe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,14 +17,11 @@ public class InscriptionController {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private UserService userService;
 
     @GetMapping("/inscription")
     public String afficherPageInscription() {
         return "inscription";
     }
-
 
     @PostMapping("/inscription/add")
     public String ajouterClient(

@@ -1244,6 +1244,11 @@ section
 	color: #b9b4c7 !important;
 }
 
+.custom-modal-size {
+	max-width: 90%;
+	width: 90%;
+}
+
 .newsletter_submit_btn
 {
 	width: 160px;
