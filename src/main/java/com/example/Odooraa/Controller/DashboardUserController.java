@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 @Controller
-public class DashboardController {
-
+public class DashboardUserController {
     @Autowired
     private CommandeRepository commandeRepository;
 
@@ -21,17 +19,14 @@ public class DashboardController {
     @Autowired
     private ProduitRepository produitRepository;
 
-    @GetMapping("/dashbord")
+    @GetMapping("/dashboardUser")
     public String afficherDashboard(Model model) {
         long nombreCommandes = commandeRepository.count();
         long nombreClients = userRepository.countByType(UserType.CLIENT);
         double totalAchats = produitRepository.count();
-
         model.addAttribute("nombreCommandes", nombreCommandes);
         model.addAttribute("nombreClients", nombreClients);
         model.addAttribute("totalAchats", totalAchats);
-
-        return "dashbord";
+        return "dashboardUser";
     }
 }
-

@@ -340,7 +340,7 @@
                                 <div class="form-group row">
                                     <label for="Type1" class="col-sm-3 col-form-label">Type:</label>
                                     <div class="col-sm-9">
-                                        <select name="Type" id="Type1" class="form-control" required>
+                                        <select name="Type1" id="Type1" class="form-control" required>
                                             <option value="">Sélectionnez </option>
                                             <option value="ADMIN">Admin</option>
                                             <option value="GERANT">gérant</option>
@@ -353,7 +353,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="button" class="btn btn-primary" id="saveChangesBtn">Enregistrer les modifications</button>
+                        <button type="button" class="btn btn-primary" id="saveChangesBtn" data-id="1">Enregistrer les modifications</button>
+
                     </div>
                 </div>
             </div>
@@ -470,68 +471,54 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/jquery-3.2.1.min.js"></script>
+
 <script>
-
-    // Lorsque le bouton "Modifier" est cliqué
     $('.btn.btn-primary').click(function() {
-
         var userId = $(this).data('id');
-
-
         loadUSERData(userId);
     });
 
-
     function loadUSERData(userId) {
-
-        // par exemple, à l'aide d'une requête AJAX
         $.ajax({
-            url: '/gerant/' + userId,
+            url: '/gerant/getUser/' + userId, // Assurez-vous que cette URL est correcte
             method: 'GET',
-            data: { id: userId },
+            dataType: 'json', // Spécifiez que vous attendez des données JSON en réponse
             success: function(response) {
-
-                $('#username').val(response.username);
-                $('#password').val(response.password);
-                $('#sexe').val(response.sexe);
-                $('#adresse').val(response.adresse);
-                $('#tel').val(response.tel);
-                $('#email').val(response.email);
-                $('#Type1').val(response.Type1);
+                $('#username1').val(response.username);
+                $('#password1').val(response.password);
+                $('#sexe1').val(response.sexe);
+                $('#adresse1').val(response.adresse);
+                $('#tel1').val(response.tel);
+                $('#email1').val(response.email);
+                $('#Type1').val(response.type);
             },
             error: function(xhr, status, error) {
-                // Gérez les erreurs ici
                 console.error(error);
             }
         });
     }
 
-    // Lorsque le bouton "Enregistrer les modifications" est cliqué
     $('#saveChangesBtn').click(function() {
-        // Récupérer les données du formulaire
         var formData = $('#editUSERForm').serialize();
+        var userId = $(this).data('id');
 
-
-        var usertId = $(this).data('id');
-
-        // Envoyer les données du formulaire au backend pour enregistrer les modifications
         $.ajax({
-            url: '/gerant/' + userId + '/edit',
+            url: '/gerant/updateUser/' + userId, // Assurez-vous que cette URL est correcte
             method: 'POST',
             data: formData,
+            dataType: 'json', // Si votre backend attend des données au format JSON
             success: function(response) {
-                // Gérer la réponse du backend, par exemple afficher un message de succès
                 alert('Les modifications ont été enregistrées avec succès !');
-                // Recharger la page ou effectuer d'autres actions si nécessaire
+                // Rechargez la page ou effectuez d'autres actions si nécessaire
             },
             error: function(xhr, status, error) {
-                // Gérer les erreurs ici, par exemple afficher un message d'erreur
                 alert('Une erreur est survenue lors de l\'enregistrement des modifications.');
                 console.error(error);
             }
         });
     });
-
 </script>
 
 </body>

@@ -9,9 +9,15 @@ import com.example.Odooraa.entities.UserSite;
 import com.example.Odooraa.entities.UserType;
 import com.example.Odooraa.entities.sexe;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class GerantController {
@@ -23,11 +29,17 @@ public class GerantController {
 
     @GetMapping("/gerant")
     public String afficherUsers(Model model) {
-        var utilisateurs = userRepository.findAll();
-        model.addAttribute("utilisateurs", utilisateurs);
-        return "Gerant";
-    }
+        List<UserSite> adminUsers = userRepository.findAllByType(UserType.ADMIN);
+        List<UserSite> gerantUsers = userRepository.findAllByType(UserType.GERANT);
 
+        // Combine the lists if necessary
+        List<UserSite> utilisateurs = new ArrayList<>();
+        utilisateurs.addAll(adminUsers);
+        utilisateurs.addAll(gerantUsers);
+
+        model.addAttribute("utilisateurs", utilisateurs);
+        return "gerant";
+    }
 
     @PostMapping("/gerant/add")
     public String ajouterGerant(
@@ -53,13 +65,44 @@ public class GerantController {
         return "redirect:/gerant"; // Redirection après l'ajout
     }
 
-
-
     @GetMapping("/gerant/delete/{id}")
     public String deleteGerant(@PathVariable Long id) {
         userService.deleteUser(id);
         return "redirect:/gerant";
     }
 
+    // Endpoint pour récupérer les données de l'utilisateur par ID
+    @GetMapping("/gerant/getUser/{userId}")
+    public ResponseEntity<UserSite> getUserById(@PathVariable Long userId) {
+        UserSite user = userService.getUserById(userId);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            throw new ResourceNotFoundException("User not found with id: " + userId);
+        }
+    }
+
+    // Endpoint pour mettre à jour les données de l'utilisateur
+    @PostMapping("/gerant/updateUser/{userId}")
+    public ResponseEntity<String> updateUser(@PathVariable Long userId, @RequestBody UserSite updatedUser) {
+        UserSite existingUser = userService.getUserById(userId);
+        if (existingUser != null) {
+            // Mettre à jour les champs de l'utilisateur existant avec les nouvelles données
+            existingUser.setUsername(updatedUser.getUsername());
+            existingUser.setPassword(updatedUser.getPassword());
+            existingUser.setSexe(updatedUser.getSexe());
+            existingUser.setAdresse(updatedUser.getAdresse());
+            existingUser.setTel(updatedUser.getTel());
+            existingUser.setEmail(updatedUser.getEmail());
+            existingUser.setType(updatedUser.getType());
+
+            // Enregistrer les modifications dans la base de données
+            userRepository.save(existingUser);
+
+            return new ResponseEntity<>("Les modifications ont été enregistrées avec succès !", HttpStatus.OK);
+        } else {
+            throw new ResourceNotFoundException("User not found with id: " + userId);
+        }
+    }
 
 }

@@ -41,7 +41,7 @@ public class LoginController {
                 // Redirect to admin dashboard
                 return "redirect:/dashbord";
             } else if (user.getType() == UserType.GERANT) {
-                return "redirect:/index";
+                return "redirect:/dashboardUser";
             } else {
                 return "redirect:/index";
             }
