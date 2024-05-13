@@ -36,6 +36,16 @@ public class UserService {
         return null;
     }
 
+    public boolean updatePassword(String username, String oldPassword, String newPassword) {
+        UserSite user = userRepository.findByUsername(username);
+        if (user != null && user.getPassword().equals(oldPassword)) {
+            user.setPassword(newPassword);
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
