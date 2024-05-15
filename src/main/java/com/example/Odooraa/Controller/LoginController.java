@@ -42,13 +42,19 @@ public class LoginController {
                 return "redirect:/dashbord";
             } else if (user.getType() == UserType.GERANT) {
                 return "redirect:/dashboardUser";
-            } else {
-                return "redirect:/index";
+            } else if(user.getType() == UserType.CLIENT){
+                return "redirect:/indexAfterInscription";
+            }else{
+                return "redirect:/error";
             }
         } else {
             // Redirect back to login page with error message
             redirectAttributes.addFlashAttribute("error", "Invalid email or password");
             return "redirect:/login";
         }
+    }
+    @GetMapping("/indexAfterInscription")
+    public String showIndexAfterInscriptionPage() {
+        return "indexAfterInscription";
     }
 }
