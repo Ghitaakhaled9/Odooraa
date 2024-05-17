@@ -1,8 +1,5 @@
 package com.example.Odooraa.entities;
-
-import java.util.Date;
 import java.util.List;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +14,6 @@ public class Produit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String marque;
     private String categorie;
     private double prix;
@@ -36,6 +32,6 @@ public class Produit {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserSite user;
 
 }

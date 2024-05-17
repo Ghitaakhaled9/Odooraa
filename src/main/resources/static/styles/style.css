@@ -4,6 +4,22 @@
 	padding-top: 10px; /* Ajustement du placement des éléments verticaux */
 }
 
+.table-container {
+	width: 100%; /* Fixer la largeur du conteneur */
+	max-width: 800px; /* Vous pouvez ajuster selon vos besoins */
+	overflow-x: auto; /* Permettre le défilement horizontal en cas de dépassement */
+}
+
+.table {
+	width: 100%; /* Assurer que le tableau occupe toute la largeur du conteneur */
+	table-layout: fixed; /* Garder une largeur constante pour les colonnes */
+}
+
+.table th, .table td {
+	padding: 10px; /* Assurer un espace cohérent entre les cellules */
+	white-space: nowrap; /* Éviter le retour à la ligne du contenu */
+}
+
 
 .card.imgholder {
 	width: 200px;  /* Fixe la largeur */

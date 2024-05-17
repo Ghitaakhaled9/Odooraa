@@ -67,8 +67,8 @@
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-										<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-										<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+										<li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+										<li><a href="/inscription"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -85,11 +85,11 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="#">ODO<span>RA</span></a>
+							<a href="/index">ODO<span>RA</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="#">home</a></li>
+								<li><a href="/index">home</a></li>
 								<li><a href="#">femme</a></li>
 								<li><a href="#">homme</a></li>
 								<li><a href="contact.html">contact</a></li>
@@ -150,11 +150,11 @@
 						<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="menu_selection">
-						<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-						<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+						<li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+						<li><a href="/inscription"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
 					</ul>
 				</li>
-				<li class="menu_item"><a href="#">home</a></li>
+				<li class="menu_item"><a href="/index">home</a></li>
 				<li class="menu_item"><a href="#">men</a></li>
 				<li class="menu_item"><a href="#">women</a></li>
 				<li class="menu_item"><a href="#">contact</a></li>
@@ -178,8 +178,8 @@
 
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Inscription</a></li>
+						<li><a href="/index">Home</a></li>
+						<li class="active"><a href="/inscription"><i class="fa fa-angle-right" aria-hidden="true"></i>Inscription</a></li>
 					</ul>
 				</div>
 
@@ -194,7 +194,7 @@
 				<div class="row">
 					<div class="col-md-8 offset-md-2">
 						<h2>Inscription</h2>
-						<form action="/register" method="post"> <!-- Modify the action and method as needed -->
+						<form action="/inscription/add" method="post">
 							<!-- Username Input -->
 							<div class="form-group">
 								<label for="username">Username</label>
@@ -205,21 +205,13 @@
 								<label for="password">Password</label>
 								<input type="password" class="form-control" id="password" name="password" required>
 							</div>
-							<div class="form-group">
-								<label for="password2">Password security reasons</label>
-								<input type="password" class="form-control" id="password2" name="password" required>
-							</div>
-							<!-- Sexe Input (Radio Buttons) -->
-							<div class="form-group">
-								<label>Sexe</label>
-								<div>
-									<input type="radio" id="sexe_m" name="sexe" value="M" required>
-									<label for="sexe_m">Male</label>
-								</div>
-								<div>
-									<input type="radio" id="sexe_f" name="sexe" value="F">
-									<label for="sexe_f">Female</label>
-								</div>
+							<div>
+								<label for="sexe">Sexe :</label>
+								<select name="sexe" id="sexe" required>
+									<option value="">Sélectionnez votre sexe</option>
+									<option value="Homme">Homme</option>
+									<option value="Femme">Femme</option>
+								</select>
 							</div>
 							<!-- Adresse Input -->
 							<div class="form-group">
@@ -236,17 +228,16 @@
 								<label for="email">Email</label>
 								<input type="email" class="form-control" id="email" name="email" required>
 							</div>
-							<!-- Submit Button -->
 							<button type="submit" class="btn btn-danger">Submit</button>
 						</form>
 					</div>
 				</div>
 			</div>
 
-			<!-- Footer (from the original template) -->
+
 			<footer class="footer">
 				<div class="container">
-					<!-- Your footer content here -->
+
 				</div>
 			</footer>
 
@@ -338,16 +329,9 @@
 		</footer>
 
 	</div>
-
-
-
-
-
+</div>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="styles/bootstrap4/popper.js"></script>
 	<script src="styles/bootstrap4/bootstrap.min.js"></script>

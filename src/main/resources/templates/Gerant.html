@@ -13,7 +13,7 @@
 
     <title>Gestion des gérants</title>
 
-    <link rel="stylesheet" href="styles/style-gerant.css">
+    <link rel="stylesheet" href="styles/style.css">
 
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
@@ -76,8 +76,8 @@
                                         <i class="fa fa-angle-down"></i>
                                     </a>
                                     <ul class="account_selection">
-                                        <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                                        <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                                        <li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+                                        <li><a href="/inscription"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -94,7 +94,7 @@
                 <div class="row">
                     <div class="col-lg-12 text-right">
                         <div class="logo_container">
-                            <a href="#">ODO<span>RA</span></a>
+                            <a href="/index">ODO<span>RA</span></a>
                         </div>
                         <nav class="navbar">
                             <ul class="navbar_menu">
@@ -159,11 +159,11 @@
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="menu_selection">
-                        <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                        <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                        <li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+                        <li><a href="/inscription"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
                     </ul>
                 </li>
-                <li class="menu_item"><a href="#">home</a></li>
+                <li class="menu_item"><a href="/index">home</a></li>
                 <li class="menu_item"><a href="#">men</a></li>
                 <li class="menu_item"><a href="#">women</a></li>
                 <li class="menu_item"><a href="#">contact</a></li>
@@ -183,159 +183,188 @@
     <br>
     <br>
 
-    <section class="p-3">
+    <div>
+        <h1>Ajouter un gérant</h1>
+        <br>
+        <br>
 
-        <div class="row">
-            <div class="col-12">
-                <button class="btn btn-primary newgerant" data-bs-toggle="modal" data-bs-target="#gerantForm">Nouveau gérant <i class="bi bi-people"></i></button>
+
+        <form action="/gerant/add" method="post">
+            <div class="flex-container">
+                <div class="inputField">
+                    <div>
+                        <label for="username">username:</label>
+                        <input type="text" name="username" id="username" required>
+                    </div>
+                    <div>
+                        <label for="password">password:</label>
+                        <input type="password" name="password" id="password" required>
+                    </div>
+                    <div>
+                        <label for="sexe">Sexe :</label>
+                        <select name="sexe" id="sexe" required>
+                            <option value="">Sélectionnez votre sexe</option>
+                            <option value="Homme">Homme</option>
+                            <option value="Femme">Femme</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="adresse">adresse:</label>
+                        <input type="text" name="adresse" id="adresse" required>
+                    </div>
+                    <div>
+                        <label for="tel">tel:</label>
+                        <input type="number" name="tel" id="tel" minlength="10" required>
+                    </div>
+                    <div>
+                        <label for="email">email:</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
+                    <div>
+                        <label for="Type">Type :</label>
+                        <select name="Type" id="Type" required>
+                            <option value="">Sélectionnez </option>
+                            <option value="ADMIN">ADMIN</option>
+                            <option value="GERANT">GERANT</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary submit">Soumettre</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form>
+            <table class="table table-striped table-hover mt-3 text-center table-bordered">
+
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>username</th>
+                    <th>password</th>
+                    <th>sexe</th>
+                    <th>adresse</th>
+                    <th>tel</th>
+                    <th>email</th>
+                    <th>type</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="utilisateur : ${utilisateurs}">
+                    <td th:text="${utilisateur.id}"></td>
+                    <td th:text="${utilisateur.username}"></td>
+                    <td th:text="${utilisateur.password}"></td>
+                    <td th:text="${utilisateur.sexe}"></td>
+                    <td th:text="${utilisateur.adresse}"></td>
+                    <td th:text="${utilisateur.tel}"></td>
+                    <td th:text="${utilisateur.email}"></td>
+                    <td th:text="${utilisateur.Type}"></td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUSERModal" data-id="1">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <a th:href="@{/gerant/delete/{id}(id=${utilisateur.id})}" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </form>
+
+
+        <div class="modal fade" id="editUSERModal" tabindex="-1" role="dialog" aria-labelledby="editUSERModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editUSERModalLabel">Modifier le gérant</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editUSERForm">
+                            <fieldset>
+                                <legend>Informations de connexion</legend>
+                                <div class="form-group row">
+                                    <label for="username1" class="col-sm-3 col-form-label">Nom:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="username1" id="username1" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="password1" class="col-sm-3 col-form-label">Password:</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" name="password1" id="password1" class="form-control" required>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Informations personnelles</legend>
+                                <div class="form-group row">
+                                    <label for="sexe1" class="col-sm-3 col-form-label">Sexe:</label>
+                                    <div class="col-sm-9">
+                                        <select name="sexe1" id="sexe1" class="form-control" required>
+                                            <option value="">Sélectionnez votre sexe</option>
+                                            <option value="Homme">Homme</option>
+                                            <option value="Femme">Femme</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="adresse1" class="col-sm-3 col-form-label">Adresse</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="adresse1" id="adresse1" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tel1" class="col-sm-3 col-form-label">Tel:</label>
+                                    <div class="col-sm-9">
+                                        <input type="number" name="tel1" id="tel1" class="form-control" minlength="10" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="email1" class="col-sm-3 col-form-label">Email:</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" name="email1" id="email1" class="form-control" required>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Type de compte</legend>
+                                <div class="form-group row">
+                                    <label for="Type1" class="col-sm-3 col-form-label">Type:</label>
+                                    <div class="col-sm-9">
+                                        <select name="Type1" id="Type1" class="form-control" required>
+                                            <option value="">Sélectionnez </option>
+                                            <option value="ADMIN">ADMIN</option>
+                                            <option value="GERANT">GERANT</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-primary" id="saveChangesBtn" data-id="1">Enregistrer les modifications</button>
+
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12">
-                <table class="table table-striped table-hover mt-3 text-center table-bordered">
 
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Image</th>
-                        <th>Nom</th>
-                        <th>Sexe</th>
-                        <th>Adresse</th>
-                        <th>Télephone</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-
-                    <tbody id="data"></tbody>
-
-                </table>
-            </div>
-        </div>
-
-    </section>
-
-
-    <!--Modal Form-->
-    <div class="modal fade" id="gerantForm">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 class="modal-title">Remplir les informations</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-
-                    <form action="#" id="myForm">
-
-                        <div class="card imgholder">
-                            <label for="imgInput" class="upload">
-                                <input type="file" name="" id="imgInput">
-                                <i class="bi bi-plus-circle-dotted"></i>
-                            </label>
-                            <img src="./image/Profile Icon.webp" alt="" width="200" height="200" class="img">
-                        </div>
-
-                        <div class="inputField">
-                            <div>
-                                <label for="name">Nom:</label>
-                                <input type="text" name="" id="name" required>
-                            </div>
-
-                            <div>
-                                <label for="sexe">Sexe:</label>
-                                <input type="text" name="" id="sexe" required>
-                            </div>
-
-                            <div>
-                                <label for="adresse">Adresse:</label>
-                                <input type="text" name="" id="adresse" required>
-                            </div>
-                            <div>
-                                <label for="telephone">Télephone:</label>
-                                <input type="number" name="" id="telephone" minlength="10" maxlength="10" required>
-                            </div>
-                            <div>
-                                <label for="email">Email:</label>
-                                <input type="email" name="" id="email"  required>
-                            </div>
-                            <div>
-                                <label for="password">Password:</label>
-                                <input type="password" name="" id="password" required>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" form="myForm" class="btn btn-primary submit">Submit</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Read Data Modal-->
-    <div class="modal fade" id="readData">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-
-                <div class="modal-header">
-                    <h4 class="modal-title">Image</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-
-                    <form action="#">
-
-                        <div class="card imgholder">
-                            <img src="./image/Profile Icon.webp" alt="" width="200" height="200" class="showImg">
-                        </div>
-
-                        <div class="inputField">
-                            <div>
-                                <label for="name">Nom:</label>
-                                <input type="text" name="" id="showName" disabled>
-                            </div>
-                            <div>
-                                <label for="sexe">Sexe:</label>
-                                <input type="text" name="" id="showSexe" disabled>
-                            </div>
-                            <div>
-                                <label for="adresse">Adresse:</label>
-                                <input type="text" name="" id="showAdresse" disabled>
-                            </div>
-                            <div>
-                                <label for="telephone">Télephone:</label>
-                                <input type="number" name="" id="showTelephone" disabled>
-                            </div>
-                            <div>
-                                <label for="email">Email:</label>
-                                <input type="email" name="" id="showemail" disabled>
-                            </div>
-                            <div>
-                                <label for="password">Password:</label>
-                                <input type="password" name="" id="showPassword" disabled>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+        <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    <script src="js/app-gerant.js"></script>
+    <script src="js/app.js"></script>
 
     <!-- Benefit -->
 
@@ -421,28 +450,12 @@
     </footer>
 
 </div>
+</div>
 
 
 
 
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    function filterByPrice() {
-        var minPrice = $('#min-price').val();
-        var maxPrice = $('#max-price').val();
-
-        $('.product-item').each(function() {
-            var productPrice = parseFloat($(this).find('.product_price').text().replace('$', ''));
-            if ((isNaN(minPrice) || productPrice >= minPrice) && (isNaN(maxPrice) || productPrice <= maxPrice)) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-    }
-</script>
 
 
 <script src="js/jquery-3.2.1.min.js"></script>
@@ -454,6 +467,71 @@
 <script src="js/custom.js"></script>
 
 
+<!-- jQuery -->
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+<script>
+    $('.btn.btn-primary').click(function() {
+        var userId = $(this).data('id');
+        $('#saveChangesBtn').data('id', userId); // Définissez l'attribut data-id pour le bouton "Enregistrer les modifications"
+        loadUSERData(userId);
+    });
+
+
+    function loadUSERData(userId) {
+        $.ajax({
+            url: '/gerant/getUser/' + userId, // Assurez-vous que cette URL est correcte
+            method: 'GET',
+            dataType: 'json', // Spécifiez que vous attendez des données JSON en réponse
+            success: function(response) {
+                $('#username1').val(response.username);
+                $('#password1').val(response.password);
+                $('#sexe1').val(response.sexe);
+                $('#adresse1').val(response.adresse);
+                $('#tel1').val(response.tel);
+                $('#email1').val(response.email);
+                $('#Type1').val(response.type);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+    $('#saveChangesBtn').click(function() {
+        var formData = {
+            username: $('#username1').val(),
+            password: $('#password1').val(),
+            sexe: $('#sexe1').val(),
+            adresse: $('#adresse1').val(),
+            tel: $('#tel1').val(),
+            email: $('#email1').val(),
+            type: $('#Type1').val()
+        };
+
+        var userId = $(this).data('id');
+
+        $.ajax({
+            url: '/gerant/updateUser/' + userId,
+            method: 'POST',
+            contentType: 'application/json', // Specify JSON content type
+            data: JSON.stringify(formData), // Convert formData to JSON
+            success: function(response) {
+                alert('Les modifications ont été enregistrées avec succès !');
+                // Reload the page or perform other actions if necessary
+            },
+            error: function(xhr, status, error) {
+                alert('Une erreur est survenue lors de l\'enregistrement des modifications.');
+                console.error(error);
+            }
+        });
+    });
+
+</script>
 
 </body>
 </html>

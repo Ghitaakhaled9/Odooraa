@@ -189,48 +189,40 @@
         <br>
 
 
-        <form action="" method="">
-
+        <form action="produits/add" method="post">
             <div class="flex-container">
                 <div class="inputField">
                     <div>
                         <label for="marque">Marque:</label>
-                        <input type="text" name="" id="marque" required>
+                        <input type="text" name="marque" id="marque" required>
                     </div>
-
                     <div>
                         <label for="categorie">Catégorie:</label>
-                        <input type="text" name="" id="categorie" required>
+                        <input type="text" name="categorie" id="categorie" required>
                     </div>
-
                     <div>
                         <label for="prix">Prix:</label>
-                        <input type="number" name="" id="prix" required>
+                        <input type="number" name="prix" id="prix" required>
                     </div>
-
                     <div>
                         <label for="description">Description:</label>
-                        <input type="text" name="" id="description" required>
+                        <input type="text" name="description" id="description" required>
                     </div>
-
                     <div>
-                        <label for="quantité">Quantité:</label>
-                        <input type="number" name="" id="quantité" minlength="1" required>
+                        <label for="quantite">Quantité:</label>
+                        <input type="number" name="quantite" id="quantite" minlength="1" required>
                     </div>
-
                     <div>
                         <label for="date1">Date:</label>
-                        <input type="date" name="" id="date1" required>
+                        <input type="date" name="date1" id="date1" required>
                     </div>
-
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary submit">Soumettre</button>
                     </div>
                 </div>
             </div>
-
-
         </form>
+
         <form>
             <table class="table table-striped table-hover mt-3 text-center table-bordered">
 
@@ -257,11 +249,67 @@
                     <td th:text="${produit.description}"></td>
                     <td th:text="${produit.quantityProduct}"></td>
                     <td th:text="${produit.date}"></td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProductModal" data-id="1">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <a th:href="@{/produits/delete/{id}(id=${produit.id})}" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?')">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
 
             </table>
         </form>
+
+
+        <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editProductModalLabel">Modifier le produit</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Formulaire de modification du produit -->
+                        <form id="editProductForm">
+                            <div class="form-group">
+                                <label for="marque1">Marque:</label>
+                                <input type="text" name="marque1" id="marque1" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="categorie1">Catégorie:</label>
+                                <input type="text" name="categorie1" id="categorie1" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="prix1">Prix:</label>
+                                <input type="number" name="prix1" id="prix1" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description1">Description:</label>
+                                <input type="text" name="description1" id="description1" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantite1">Quantité:</label>
+                                <input type="number" name="quantite1" id="quantite1" class="form-control" minlength="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="date2">Date:</label>
+                                <input type="date" name="date2" id="date2" class="form-control" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-primary" id="saveChangesBtn">Enregistrer les modifications</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -369,6 +417,72 @@
 <script src="js/custom.js"></script>
 
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+
+    // Lorsque le bouton "Modifier" est cliqué
+    $('.btn.btn-primary').click(function() {
+        // Récupère l'identifiant du produit à modifier depuis l'attribut data-id du bouton
+        var productId = $(this).data('id');
+
+        // Charge les données du produit à modifier dans la modal
+        loadProductData(productId);
+    });
+
+    // Fonction pour charger les données du produit à modifier
+    function loadProductData(productId) {
+        // Ici, vous devez implémenter la logique pour charger les données du produit
+        // par exemple, à l'aide d'une requête AJAX
+        $.ajax({
+            url: '/produits/' + productId, // L'URL pour obtenir les données du produit
+            method: 'GET',
+            data: { id: productId }, // Envoyer l'identifiant du produit au backend
+            success: function(response) {
+                // Remplissez les champs du formulaire avec les données du produit
+                $('#marque1').val(response.marque);
+                $('#categorie1').val(response.categorie);
+                $('#prix1').val(response.prix);
+                $('#description1').val(response.description);
+                $('#quantite1').val(response.quantite);
+                $('#date1').val(response.date1); // Utilisez "date1" au lieu de "date2" pour correspondre à l'ID de l'input
+            },
+            error: function(xhr, status, error) {
+                // Gérez les erreurs ici
+                console.error(error);
+            }
+        });
+    }
+
+    // Lorsque le bouton "Enregistrer les modifications" est cliqué
+    $('#saveChangesBtn').click(function() {
+        // Récupérer les données du formulaire
+        var formData = $('#editProductForm').serialize();
+
+        // Récupérer l'identifiant du produit à modifier depuis l'attribut data-id du bouton "Modifier"
+        var productId = $(this).data('id');
+
+        // Envoyer les données du formulaire au backend pour enregistrer les modifications
+        $.ajax({
+            url: '/produits/' + productId + '/edit', // Endpoint pour la modification du produit
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+                // Gérer la réponse du backend, par exemple afficher un message de succès
+                alert('Les modifications ont été enregistrées avec succès !');
+                // Recharger la page ou effectuer d'autres actions si nécessaire
+            },
+            error: function(xhr, status, error) {
+                // Gérer les erreurs ici, par exemple afficher un message d'erreur
+                alert('Une erreur est survenue lors de l\'enregistrement des modifications.');
+                console.error(error);
+            }
+        });
+    });
+
+</script>
 
 </body>
 </html>
