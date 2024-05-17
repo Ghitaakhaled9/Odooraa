@@ -106,7 +106,7 @@
                     
                         <ul> 
                             <li><a th:href="@{'/favoris'}"><i class="fa fa-heart"></i> <span th:text="${nombreProduits}"></span></a></li>
-                             <li><a href="#"><i class="fa fa-shopping-cart"></i> <span  th:text="${nombreProduits}"></span></a></li>
+                             <li><a href="#"><i class="fa fa-shopping-cart"></i> <span  th:text="${nombreFavoris}"></span></a></li>
                             <li><a href="#"><i class="fa fa-user"></i> </a></li>
                         </ul>
                         
@@ -133,11 +133,11 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
-                                
-                                <input type="text" placeholder="What do yo u need?">
+                            <form class="search__form" action="#">
+                                <input class="search-input" type="text" placeholder="Search by brand...">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
+                            
                         </div>
                         
                     </div>
@@ -174,52 +174,35 @@
                         <table>
                             <thead>
                                 <tr>
-                                    
                                     <th></th>
-                                    <th >Product</th>
+                                    <th>Product</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
                                     <th></th>
                                 </tr>
                             </thead>
-                           <tbody>
-        <form action="/updateCart" method="post">
-                    <div th:each="panier : ${listPanier}">
-                       <tr th:each="produit : ${panier.produits}">
-                            
-                           <td> <img src="img/perfume1.jpg" class="productimg" alt=""> </td>
-                            <td th:text="${produit.marque}"></td>
-                             
-                            <td id="productPrice" th:text="${produit.prix}"></td>
-
-                            
-                             <td >
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                               <input type="text" id="quantityInput" value="1" onchange="updateSubtotal()">
-                                            </div>
-                                        </div>
+                            <tbody>
+                                <form action="/updateCart" method="post">
+                                    <div th:each="panier : ${listPanier}">
+                                   <tr th:each="produit : ${panier.produits}" class="product">
+                                    <td><img src="img/perfume1.jpg" class="productimg" alt=""></td>
+                                    <td th:text="${produit.marque}" class="productBrand"></td>
+                                    <td class="productPrice" th:text="${produit.prix}"></td>
+                                    <td>
+                                        <input type="number" value="1" class="form-control text-center quantityInput my-custom-style" style="max-width: 55px; font-size: 14px;" min="1">
                                     </td>
                                     
-                                     <td  th:text="${produit.prix}"class="shoping__cart__total" id="totalAmount">
-                                       
+                                    
+                                    <td class="productTotal" th:text="${produit.prix}"></td>
+                                    <td class="shoping__cart__item__close">
+                                        <a th:href="@{'/deleteProduct/' + ${produit.id}}"><span class="glyphicon glyphicon-remove"></span></a>
                                     </td>
-                                     
-  
-
-    
-   
-             
-                           <td class="shoping__cart__item__close">
-                           <a th:href="@{'/delete/' + ${panier.id}}"> <span class="glyphicon glyphicon-remove"></span></a>
-        
-                                   
-                            </td>
-                        </tr>
-                        </div>
-                         </form>
-                    </tbody>
+                                    
+                                </tr>
+                            </div>
+                        </form>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -228,18 +211,19 @@
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
                         <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
+                        <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span> Upadate Cart</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping__continue">
                         <div class="shoping__discount">
                             <h5>Discount Codes</h5>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your coupon code">
-                                <button type="submit" class="site-btn">APPLY COUPON</button>
+                            <form id="couponForm">
+                                <input type="text" id="couponCode" placeholder="Enter coupon code">
+                                
+                                <button type="submit" class="site-btn">Apply Coupon</button>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -247,11 +231,12 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span name="total" id="subtotal" th:text="${total}"></span></li>
-                            <li>Total <span id="totalAmount">$454.98</span></li>
+                            <li>Subtotal <span id="currentTotal" class="subtotal"></span></li>
+                            
+                            <li>Total <span class="totalAmount" id="totalValue"></span></li>
 
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <a  id="checkoutButton" class="primary-btn" href="">PROCEED TO CHECKOUT</a>
                     </div>
                 </div>
             </div>
@@ -326,30 +311,96 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    
-  function updateSubtotal() {
-    // Get the quantity input value
-    var quantity = parseInt(document.getElementById('quantityInput').value);
+        $(document).ready(function() {
+            // Mettre à jour le total lorsque la quantité change
+            $('.quantityInput').on('input', function() {
+                const quantity = $(this).val();
+                const price = parseFloat($(this).closest('tr').find('.productPrice').text().replace('$', ''));
+                const total = price * quantity;
+                $(this).closest('tr').find('.productTotal').text('$' + total.toFixed(2));
 
-    // Get the price per unit
-    var price = parseFloat(document.getElementById('price').innerText);
+                // Mettre à jour le sous-total et le total global
+                updateTotalAmount();
+            });
 
-    // Calculate the subtotal
-    var subtotal = quantity * price;
+            // Fonction pour mettre à jour le total global
+            function updateTotalAmount() {
+                let subtotal = 0;
+                $('.productTotal').each(function() {
+                    subtotal += parseFloat($(this).text().replace('$', ''));
+                });
+                $('.subtotal').text('$' + subtotal.toFixed(2));
+                $('.totalAmount').text('$' + subtotal.toFixed(2));
+            }
+        });
+    </script>
 
-    // Update the subtotal cell with the calculated value
-    document.getElementById('subtotal').innerText = subtotal.toFixed(2);
+<script>
+     console.log("jjjjj")
+   $(document).ready(function() {
+    // Fonction de recherche par marque
+    function searchProductsByBrand(brandName) {
+        brandName = brandName.toLowerCase(); 
+        console.log(brandName)// Convertir le nom de marque en minuscules pour la comparaison de chaînes
+        $('.product').each(function() {
+            const productBrand = $(this).find('.productBrand').text().toLowerCase(); 
+            console.log(productBrand)// Récupérer la marque du produit en minuscules
+            if (productBrand.includes(brandName)) {
+                console.log("yes")
+                $(this).show(); // Afficher le produit si la marque correspond
+            } else {
+                //console.log("noo")
+                $(this).hide(); // Masquer le produit sinon
+            }
+        });
+    }
 
-    // Update the total amount
-    var totalAmount = document.getElementById('totalAmount');
-    var currentTotal = parseFloat(totalAmount.innerText.replace('$', ''));
-    var newTotal = currentTotal - parseFloat(document.getElementById('subtotal').innerText) + subtotal;
-    totalAmount.innerText = '$' + newTotal.toFixed(2);
-}
+    // Événement de soumission du formulaire de recherche
+    $('.search__form form').submit(function(event) {
+        event.preventDefault(); // Empêcher le rechargement de la page
+        const brandName = $(this).find('input[type="text"]').val(); // Récupérer le nom de marque de la recherche
+        searchProductsByBrand(brandName); // Appeler la fonction de recherche avec le nom de marque
+    });
 
-  </script>
+    // Événement de clic sur le bouton de recherche
+    $('.search__form button').click(function(event) {
+        event.preventDefault(); // Empêcher le rechargement de la page
+        const brandName = $(this).siblings('input[type="text"]').val(); // Récupérer le nom de marque de la recherche
+        searchProductsByBrand(brandName); // Appeler la fonction de recherche avec le nom de marque
+    });
+});
+
+
+</script>
+
+<script>
+    $(document).ready(function() {
+        // Fonction pour mettre à jour le total global
+        function updateTotalAmount() {
+            let subtotal = 0;
+            $('.productTotal').each(function() {
+                subtotal += parseFloat($(this).text().replace('$', ''));
+            });
+            $('.subtotal').text('$' + subtotal.toFixed(2));
+            $('.totalAmount').text('$' + subtotal.toFixed(2));
+        }
+
+        // Appeler la fonction pour mettre à jour le total au chargement de la page
+        updateTotalAmount();
+    });
+</script>
+
+<script>
+    // Get the subtotal and total values using JavaScript
+    var subtotalValue = $(this).closest('span').find('.subtotal').text();
+    var totalValue = document.getElementById("totalValue").innerHTML;
+    console.log(subtotalValue)
+
+    // Update the checkout button link with the calculated values
+    document.getElementById("checkoutButton").href = '/check?subtotal=' + subtotalValue + '&total=' + totalValue;
+</script>
 
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -361,6 +412,38 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            
+            $('#couponForm').submit(function(event) {
+                event.preventDefault(); // Prevent form submission
+                //parseFloat($(this).text().replace('$', ''));
+                const currentTotal =parseFloat(document.getElementById('currentTotal').innerHTML.replace('$', ''));
+                //const currentTotal = parseFloat($('#currentTotal').val());
+                const couponCode = $('#couponCode').val();
+                //const currentTotal = parseFloat($('#currentTotal').val());
+                console.log(couponCode)
+                console.log(currentTotal)
+        
+                // Send AJAX request to apply coupon
+                $.ajax({
+                    type: 'POST',
+                    url: '/applyCoupon',
+                    data: { couponCode: couponCode, currentTotal: currentTotal },
+                    success: function(response) {
+                        // Update total amount in the interface
+                        const newTotal = parseFloat(response.split(': ')[1]);
+                        $('.totalAmount').text('$' + newTotal.toFixed(2));
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error applying coupon: ' + error);
+                    }
+                });
+            });
+        });
+        
+        </script>
+        
 
 </body>
 

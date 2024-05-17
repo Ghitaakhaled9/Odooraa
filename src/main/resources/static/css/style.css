@@ -184,6 +184,14 @@ ol {
 	border: none;
 }
 
+/* Boutton de quatity*/
+
+.my-custom-style {
+    /* Ajoutez vos styles personnalisés ici */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
 
 /* Alignement des éléments du tableau */
 /* Styles pour le tableau */

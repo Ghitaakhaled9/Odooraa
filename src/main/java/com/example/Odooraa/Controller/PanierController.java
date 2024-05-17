@@ -1,8 +1,11 @@
 package com.example.Odooraa.Controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,11 +35,12 @@ public class PanierController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/oriPanier")
     public String listPanier(Model model) {
         model.addAttribute("listPanier", panierService.getAllPaniers());
         System.out.print("jjjjjjj");
         int nombreProduits = 0;
+        int nombreFavoris = 0;
         User user = userService.getUserById(1L);
         nombreProduits = user.getPanier().getProduits().size();
         model.addAttribute("nombreProduits", nombreProduits);
@@ -45,7 +49,11 @@ public class PanierController {
         for (Produit product : user.getPanier().getProduits()) {
             totalPrice += product.getPrix();
         }
+        nombreFavoris = user.getFavoris().getProduits().size();
+        model.addAttribute("nombreFavoris", nombreFavoris);
+
         model.addAttribute("total", totalPrice);
+
         return "oriPanier";
     }
 
@@ -89,10 +97,17 @@ public class PanierController {
         return "redirect:/panier";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/deletePanier/{id}")
     public String deletePanier(@PathVariable Long id) {
         panierService.deletePanier(id);
         return "redirect:/panier/list";
+    }
+
+    @GetMapping("/deleteProduct/{productId}")
+    public String deleteProductFromCart(@PathVariable Long productId) {
+        panierService.removeProductFromCart(productId, 1L);
+
+        return "redirect:/oriPanier";
     }
 
     /*
@@ -113,5 +128,17 @@ public class PanierController {
      * return "panier";
      * }
      */
+
+    @PostMapping("/updateTotal")
+    public ResponseEntity<?> updateTotal(@RequestParam Long productId, @RequestParam int quantity) {
+        // Calculez le nouveau total en fonction de l'ID du produit et de la quantité
+        // double newTotal = cartService.calculateNewTotal(productId, quantity);
+        System.out.print("paanier");
+        double newTotal = quantity * 3;
+        // Retournez le nouveau total en tant que réponse JSON
+        Map<String, Object> response = new HashMap<>();
+        response.put("totalAmount", newTotal);
+        return ResponseEntity.ok(response);
+    }
 
 }

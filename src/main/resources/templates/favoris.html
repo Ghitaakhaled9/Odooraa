@@ -119,9 +119,9 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                     
-                        <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span th:text="${nombreProduits}"></span></a></li>
-                             <li><a href="#"><i class="fa fa-shopping-cart"></i> <span  th:text="${nombreProduits}"></span></a></li>
+                        <ul> 
+                            <li><a th:href="@{'/favoris'}"><i class="fa fa-heart"></i> <span th:text="${nombreProduits}"></span></a></li>
+                             <li><a th:href="@{'/oriPanier'}"><i class="fa fa-shopping-cart"></i> <span  th:text="${nombreFavoris}"></span></a></li>
                             <li><a href="#"><i class="fa fa-user"></i> </a></li>
                         </ul>
                         
@@ -148,11 +148,11 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
-                                
-                                <input type="text" placeholder="What do yo u need?">
+                            <form class="search__form" action="#">
+                                <input class="search-input" type="text" placeholder="Search by brand...">
                                 <button type="submit" class="site-btn">SEARCH</button>
                             </form>
+                            
                         </div>
                         
                     </div>
@@ -197,24 +197,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <form action="/updateCart" method="post">
-                                <div th:each="panier : ${listPanier}">
-                                    <tr th:each="produit : ${panier.produits}">
+                            <form action="/addToPanier" method="post">
+                                <div th:each="favoris: ${listFavoris}">
+                                    <tr th:each="produit : ${favoris.produits}" class="product">
                                         <td><img src="img/perfume1.jpg" class="productimg" alt=""></td>
-                                        <td th:text="${produit.marque}"></td>
+                                        <td th:text="${produit.marque}" class="productBrand"></td>
                                         <td id="productPrice" th:text="${produit.prix}"></td>
                                         <td>
-                                            <button type="button" class="btn btn-default btn-sm">
+                                            <input type="hidden" name="productId" th:value="${produit.id}" />
+                                            <button type="submit" class="btn btn-default btn-sm" name="productId" >
                                                 <span id="carticon" class="glyphicon glyphicon-shopping-cart"></span>
                                                 <b>Add to Cart</b>
                                             </button>
                                         </td>
                                         <td class="shoping__cart__item__close">
-                                            <a th:href="@{'/delete/' + ${panier.id}}"><span class="glyphicon glyphicon-remove"></span></a>
+                                            <a th:href="@{'/deleteProduct/' + ${produit.id}}"><span class="glyphicon glyphicon-remove"></span></a>
                                         </td>
                                     </tr>
                                 </div>
                             </form>
+                            
                         </tbody>
                     </table>
                 </div>
@@ -300,7 +302,7 @@
         </div>
     </footer>
     <!-- Footer Section End -->
-    
+    <script>
   function updateSubtotal() {
     // Get the quantity input value
     var quantity = parseInt(document.getElementById('quantityInput').value);
@@ -320,9 +322,46 @@
     var newTotal = currentTotal - parseFloat(document.getElementById('subtotal').innerText) + subtotal;
     totalAmount.innerText = '$' + newTotal.toFixed(2);
 }
+   
+</script>
 
-    
+<script>
+    console.log("jjjjj")
+  $(document).ready(function() {
+   // Fonction de recherche par marque
+   function searchProductsByBrand(brandName) {
+       brandName = brandName.toLowerCase(); 
+       console.log(brandName)// Convertir le nom de marque en minuscules pour la comparaison de chaînes
+       $('.product').each(function() {
+           const productBrand = $(this).find('.productBrand').text().toLowerCase(); 
+           console.log(productBrand)// Récupérer la marque du produit en minuscules
+           if (productBrand.includes(brandName)) {
+               console.log("yes")
+               $(this).show(); // Afficher le produit si la marque correspond
+           } else {
+               //console.log("noo")
+               $(this).hide(); // Masquer le produit sinon
+           }
+       });
+   }
 
+   // Événement de soumission du formulaire de recherche
+   $('.search__form form').submit(function(event) {
+       event.preventDefault(); // Empêcher le rechargement de la page
+       const brandName = $(this).find('input[type="text"]').val(); // Récupérer le nom de marque de la recherche
+       searchProductsByBrand(brandName); // Appeler la fonction de recherche avec le nom de marque
+   });
+
+   // Événement de clic sur le bouton de recherche
+   $('.search__form button').click(function(event) {
+       event.preventDefault(); // Empêcher le rechargement de la page
+       const brandName = $(this).siblings('input[type="text"]').val(); // Récupérer le nom de marque de la recherche
+       searchProductsByBrand(brandName); // Appeler la fonction de recherche avec le nom de marque
+   });
+});
+
+
+</script>
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
