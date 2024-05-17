@@ -309,7 +309,7 @@
                                 <div class="form-group row">
                                     <label for="sexe1" class="col-sm-3 col-form-label">Sexe:</label>
                                     <div class="col-sm-9">
-                                        <select name="sexe" id="sexe1" class="form-control" required>
+                                        <select name="sexe1" id="sexe1" class="form-control" required>
                                             <option value="">Sélectionnez votre sexe</option>
                                             <option value="Homme">Homme</option>
                                             <option value="Femme">Femme</option>
@@ -342,8 +342,8 @@
                                     <div class="col-sm-9">
                                         <select name="Type1" id="Type1" class="form-control" required>
                                             <option value="">Sélectionnez </option>
-                                            <option value="ADMIN">Admin</option>
-                                            <option value="GERANT">gérant</option>
+                                            <option value="ADMIN">ADMIN</option>
+                                            <option value="GERANT">GERANT</option>
                                         </select>
                                     </div>
                                 </div>
@@ -456,7 +456,7 @@
 
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
@@ -468,17 +468,19 @@
 
 
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <!-- Bootstrap JS -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="js/jquery-3.2.1.min.js"></script>
+
+
 
 <script>
     $('.btn.btn-primary').click(function() {
         var userId = $(this).data('id');
+        $('#saveChangesBtn').data('id', userId); // Définissez l'attribut data-id pour le bouton "Enregistrer les modifications"
         loadUSERData(userId);
     });
+
 
     function loadUSERData(userId) {
         $.ajax({
@@ -501,17 +503,26 @@
     }
 
     $('#saveChangesBtn').click(function() {
-        var formData = $('#editUSERForm').serialize();
+        var formData = {
+            username: $('#username1').val(),
+            password: $('#password1').val(),
+            sexe: $('#sexe1').val(),
+            adresse: $('#adresse1').val(),
+            tel: $('#tel1').val(),
+            email: $('#email1').val(),
+            type: $('#Type1').val()
+        };
+
         var userId = $(this).data('id');
 
         $.ajax({
-            url: '/gerant/updateUser/' + userId, // Assurez-vous que cette URL est correcte
+            url: '/gerant/updateUser/' + userId,
             method: 'POST',
-            data: formData,
-            dataType: 'json', // Si votre backend attend des données au format JSON
+            contentType: 'application/json', // Specify JSON content type
+            data: JSON.stringify(formData), // Convert formData to JSON
             success: function(response) {
                 alert('Les modifications ont été enregistrées avec succès !');
-                // Rechargez la page ou effectuez d'autres actions si nécessaire
+                // Reload the page or perform other actions if necessary
             },
             error: function(xhr, status, error) {
                 alert('Une erreur est survenue lors de l\'enregistrement des modifications.');
@@ -519,6 +530,7 @@
             }
         });
     });
+
 </script>
 
 </body>

@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -71,16 +72,7 @@ public class GerantController {
         return "redirect:/gerant";
     }
 
-    // Endpoint pour récupérer les données de l'utilisateur par ID
-    @GetMapping("/gerant/getUser/{userId}")
-    public ResponseEntity<UserSite> getUserById(@PathVariable Long userId) {
-        UserSite user = userService.getUserById(userId);
-        if (user != null) {
-            return ResponseEntity.ok(user);
-        } else {
-            throw new ResourceNotFoundException("User not found with id: " + userId);
-        }
-    }
+
 
     // Endpoint pour mettre à jour les données de l'utilisateur
     @PostMapping("/gerant/updateUser/{userId}")
@@ -90,7 +82,10 @@ public class GerantController {
             // Mettre à jour les champs de l'utilisateur existant avec les nouvelles données
             existingUser.setUsername(updatedUser.getUsername());
             existingUser.setPassword(updatedUser.getPassword());
-            existingUser.setSexe(updatedUser.getSexe());
+            if (StringUtils.isEmpty(existingUser.getSexe())) {
+                // Handle the empty sexe value here, such as providing a default value or skipping it
+                existingUser.setSexe(sexe.DEFAULT); // Example: setting a default value
+            }
             existingUser.setAdresse(updatedUser.getAdresse());
             existingUser.setTel(updatedUser.getTel());
             existingUser.setEmail(updatedUser.getEmail());
@@ -101,8 +96,20 @@ public class GerantController {
 
             return new ResponseEntity<>("Les modifications ont été enregistrées avec succès !", HttpStatus.OK);
         } else {
-            throw new ResourceNotFoundException("User not found with id: " + userId);
+            return new ResponseEntity<>("Utilisateur non trouvé avec l'identifiant: " + userId, HttpStatus.NOT_FOUND);
         }
     }
+    // Define the updateUser method
 
+
+
+    @GetMapping("/gerant/getUser/{userId}")
+    public ResponseEntity<UserSite> getUser(@PathVariable Long userId) {
+        UserSite user = userService.getUserById(userId);
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
