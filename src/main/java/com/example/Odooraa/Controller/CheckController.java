@@ -9,7 +9,7 @@ import com.example.Odooraa.Service.FavorisService;
 import com.example.Odooraa.Service.PanierService;
 import com.example.Odooraa.Service.UserService;
 import com.example.Odooraa.entities.Produit;
-import com.example.Odooraa.entities.User;
+import com.example.Odooraa.entities.UserSite;
 
 import org.springframework.ui.Model;
 
@@ -33,7 +33,7 @@ public class CheckController {
 
         int nombreProduits = 0;
         int nombreFavoris = 0;
-        User user = userService.getUserById(1L);
+        UserSite user = userService.getUserById(1L);
         nombreProduits = user.getPanier().getProduits().size();
         model.addAttribute("nombreProduits", nombreProduits);
         System.out.println("hhhhhhhhhhhhh" + nombreProduits);

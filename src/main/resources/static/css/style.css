@@ -1943,6 +1943,18 @@ td b {
 	color: #1c1c1c;
 	padding-bottom: 20px;
 }
+.shoping__cart__table table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.shoping__cart__table th, .shoping__cart__table td {
+	padding: 10px;
+	text-align: center;
+	vertical-align: middle;
+	border-bottom: 1px solid #ddd;
+}
+
+
 
 .shoping__cart__table table thead th.shoping__product {
 	text-align: left;
@@ -1952,11 +1964,12 @@ td b {
 	padding-top: 30px;
 	padding-bottom: 30px;
 	border-bottom: 1px solid #ebebeb;
+	text-align: center;
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__item {
 	width: 630px;
-	text-align: left;
+	text-align: center;
 }
 
 .productimg {

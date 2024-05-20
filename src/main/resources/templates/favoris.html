@@ -107,7 +107,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="./index.html">Home</a></li>
-                            <li class="active"><a href="./shop-grid.html">Femme</a></li>
+                            <li ><a href="./shop-grid.html">Femme</a></li>
                             <li><a href="#">Homme</a>
                                
                             </li>
@@ -120,8 +120,8 @@
                     <div class="header__cart">
                     
                         <ul> 
-                            <li><a th:href="@{'/favoris'}"><i class="fa fa-heart"></i> <span th:text="${nombreProduits}"></span></a></li>
-                             <li><a th:href="@{'/oriPanier'}"><i class="fa fa-shopping-cart"></i> <span  th:text="${nombreFavoris}"></span></a></li>
+                            <li><a th:href="@{'/favoris'}"><i class="fa fa-heart"></i> <span th:text="${nombreFavoris}"></span></a></li>
+                             <li><a th:href="@{'/oriPanier'}"><i class="fa fa-shopping-cart"></i> <span  th:text="${nombreProduits}"></span></a></li>
                             <li><a href="#"><i class="fa fa-user"></i> </a></li>
                         </ul>
                         
@@ -211,7 +211,7 @@
                                             </button>
                                         </td>
                                         <td class="shoping__cart__item__close">
-                                            <a th:href="@{'/deleteProduct/' + ${produit.id}}"><span class="glyphicon glyphicon-remove"></span></a>
+                                            <a th:href="@{'/deleteProductFavoris/' + ${produit.id}}"><span class="glyphicon glyphicon-remove"></span></a>
                                         </td>
                                     </tr>
                                 </div>
@@ -227,7 +227,7 @@
                     <div class="shoping__cart__btns">
                         <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
                         <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
-                            Upadate Cart</a>
+                            Upadate Favoris</a>
                     </div>
                 </div>
                 

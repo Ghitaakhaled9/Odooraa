@@ -13,7 +13,7 @@ import com.example.Odooraa.Service.PanierService;
 import com.example.Odooraa.Service.ProduitService;
 import com.example.Odooraa.Service.UserService;
 import com.example.Odooraa.entities.Produit;
-import com.example.Odooraa.entities.User;
+import com.example.Odooraa.entities.UserSite;
 
 @Controller
 public class FavorisController {
@@ -39,7 +39,7 @@ public class FavorisController {
         System.out.print("jjjjjjj");
         int nombreProduits = 0;
         int nombreFavoris = 0;
-        User user = userService.getUserById(1L);
+        UserSite user = userService.getUserById(1L);
         nombreProduits = user.getPanier().getProduits().size();
         model.addAttribute("nombreProduits", nombreProduits);
         System.out.println("hhhhhhhhhhhhh" + nombreProduits);
@@ -64,6 +64,7 @@ public class FavorisController {
     public String addToCart(@RequestParam Long productId) {
         Produit produit = produitService.getProduitById(productId);
         panierService.ajouterProduitAuPanier(1L, produit);
-        return "redirect:/oriPanier"; // Redirect to cart or any other page
+        favorisService.removeProductFromCart(productId, 1L);
+        return "redirect:/favoris"; // Redirect to cart or any other page
     }
 }

@@ -18,7 +18,7 @@ import com.example.Odooraa.Service.PanierService;
 import com.example.Odooraa.Service.UserService;
 import com.example.Odooraa.entities.Panier;
 import com.example.Odooraa.entities.Produit;
-import com.example.Odooraa.entities.User;
+import com.example.Odooraa.entities.UserSite;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -41,7 +41,7 @@ public class PanierController {
         System.out.print("jjjjjjj");
         int nombreProduits = 0;
         int nombreFavoris = 0;
-        User user = userService.getUserById(1L);
+        UserSite user = userService.getUserById(1L);
         nombreProduits = user.getPanier().getProduits().size();
         model.addAttribute("nombreProduits", nombreProduits);
         System.out.println("hhhhhhhhhhhhh" + nombreProduits);

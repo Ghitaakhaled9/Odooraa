@@ -92,7 +92,7 @@
                     <nav class="header__menu">
                         <ul>
                             <li><a href="./index.html">Home</a></li>
-                            <li class="active"><a href="./shop-grid.html">Femme</a></li>
+                            <li ><a href="./shop-grid.html">Femme</a></li>
                             <li><a href="#">Homme</a>
                                
                             </li>
@@ -105,8 +105,8 @@
                     <div class="header__cart">
                     
                         <ul> 
-                            <li><a th:href="@{'/favoris'}"><i class="fa fa-heart"></i> <span th:text="${nombreProduits}"></span></a></li>
-                             <li><a href="#"><i class="fa fa-shopping-cart"></i> <span  th:text="${nombreFavoris}"></span></a></li>
+                            <li><a th:href="@{'/favoris'}"><i class="fa fa-heart"></i> <span th:text="${nombreFavoris}"></span></a></li>
+                             <li><a href="#"><i class="fa fa-shopping-cart"></i> <span  th:text="${nombreProduits}"></span></a></li>
                             <li><a href="#"><i class="fa fa-user"></i> </a></li>
                         </ul>
                         
@@ -393,15 +393,31 @@
 </script>
 
 <script>
-    // Get the subtotal and total values using JavaScript
-    var subtotalValue = $(this).closest('span').find('.subtotal').text();
-    var totalValue = document.getElementById("totalValue").innerHTML;
-    console.log(subtotalValue)
+    // Fonction pour récupérer les valeurs du Subtotal et du Total
+    function getCartValues() {
+        var currentTotalElement = document.getElementById('currentTotal');
+        var currentTotalValue = currentTotalElement.textContent;
 
-    // Update the checkout button link with the calculated values
-    document.getElementById("checkoutButton").href = '/check?subtotal=' + subtotalValue + '&total=' + totalValue;
+        var totalValueElement = document.getElementById('totalValue');
+        var totalValue = totalValueElement.textContent;
+
+        return {
+            subtotal: currentTotalValue,
+            total: totalValue
+        };
+    }
+
+    // Ajouter un écouteur d'événements au bouton de checkout
+    document.getElementById('checkoutButton').addEventListener('click', function(event) {
+        event.preventDefault(); // Empêcher le comportement par défaut du lien
+
+        var cartValues = getCartValues();
+        var url = '/check?subtotal=' + encodeURIComponent(cartValues.subtotal) + '&total=' + encodeURIComponent(cartValues.total);
+
+        // Rediriger vers la page de checkout avec les valeurs en paramètre d'URL
+        window.location.href = url;
+    });
 </script>
-
     <!-- Js Plugins -->
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
