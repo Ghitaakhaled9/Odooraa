@@ -186,7 +186,7 @@
                                 <form action="/updateCart" method="post">
                                     <div th:each="panier : ${listPanier}">
                                    <tr th:each="produit : ${panier.produits}" class="product">
-                                    <td><img th:src="${produit.imageUrl}" alt=""></td>
+                                    <td><img th:src="${produit.imageUrl}" alt="" class="productimg"></td>
                                     <td th:text="${produit.marque}" class="productBrand"></td>
                                     <td class="productPrice" th:text="${produit.prix}"></td>
                                     <td>

@@ -59,16 +59,18 @@ public class FavorisController {
     }
 
     @GetMapping("/deleteProductFavoris/{productId}")
-    public String deleteProductFromCart(@PathVariable Long productId) {
-        favorisService.removeProductFromCart(productId, 1L);
+    public String deleteProductFromCart(@PathVariable Long productId, HttpSession session) {
+        UserSite userSession = (UserSite) session.getAttribute("user");
+        favorisService.removeProductFromCart(productId, userSession.getId());
 
         return "redirect:/check";
     }
 
     @PostMapping("/addToPanier")
-    public String addToCart(@RequestParam Long productId) {
+    public String addToCart(@RequestParam Long productId, HttpSession session) {
         Produit produit = produitService.getProduitById(productId);
-        panierService.ajouterProduitAuPanier(1L, produit);
+        UserSite userSession = (UserSite) session.getAttribute("user");
+        panierService.ajouterProduitAuPanier(userSession.getId(), produit);
         favorisService.removeProductFromCart(productId, 1L);
         return "redirect:/favoris"; // Redirect to cart or any other page
     }

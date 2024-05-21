@@ -109,8 +109,9 @@ public class PanierController {
     }
 
     @GetMapping("/deleteProduct/{productId}")
-    public String deleteProductFromCart(@PathVariable Long productId) {
-        panierService.removeProductFromCart(productId, 1L);
+    public String deleteProductFromCart(@PathVariable Long productId, HttpSession session) {
+        UserSite userSession = (UserSite) session.getAttribute("user");
+        panierService.removeProductFromCart(productId, userSession.getId());
 
         return "redirect:/oriPanier";
     }
