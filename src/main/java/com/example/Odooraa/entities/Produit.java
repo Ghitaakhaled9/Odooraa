@@ -14,13 +14,14 @@ public class Produit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String imageUrl; // add attribute for image URL
     private String marque;
     private String categorie;
     private double prix;
     private String description;
     private int quantityProduct;
     private String date;
+
 
     @ManyToMany(mappedBy = "produits")
     private List<Panier> paniers;

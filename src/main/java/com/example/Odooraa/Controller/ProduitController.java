@@ -4,7 +4,7 @@ import com.example.Odooraa.Repository.ProduitRepository;
 import com.example.Odooraa.Service.ProduitService;
 import com.example.Odooraa.entities.Produit;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Map;
-import java.util.Optional;
+
 
 
 @Controller
