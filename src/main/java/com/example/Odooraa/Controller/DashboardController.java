@@ -26,11 +26,12 @@ public class DashboardController {
         long nombreCommandes = commandeRepository.count();
         long nombreClients = userRepository.countByType(UserType.CLIENT);
         double totalAchats = produitRepository.count();
+        long nombreProdQuantNull = produitRepository.countByQuantityProductZero();
 
         model.addAttribute("nombreCommandes", nombreCommandes);
         model.addAttribute("nombreClients", nombreClients);
         model.addAttribute("totalAchats", totalAchats);
-
+        model.addAttribute("nombreProdQuantNull", nombreProdQuantNull);
         return "dashbord";
     }
 }

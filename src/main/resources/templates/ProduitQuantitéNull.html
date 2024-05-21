@@ -4,36 +4,22 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
     <!--Bootstrap 5 icons CDN-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-    <title>Gestion des utilisateurs</title>
-
+    <title>Alert</title>
     <link rel="stylesheet" href="styles/style.css">
-
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-
 </head>
 <body>
-
-
 <div class="super_container">
-
-    <!-- Header -->
-
     <header class="header trans_300">
-
-        <!-- Top Navigation -->
-
         <div class="top_nav">
             <div class="container">
                 <div class="row">
@@ -59,8 +45,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Main Navigation -->
 
         <div class="main_nav_container">
             <div class="container">
@@ -118,9 +102,6 @@
             </ul>
         </div>
     </div>
-
-    <!-- Slider -->
-
     <br>
     <br>
     <br>
@@ -130,40 +111,35 @@
     <br>
     <br>
     <br>
-
     <div>
         <h1>Les utilisateurs du site</h1>
-
         <form>
             <table class="table table-striped table-hover mt-3 text-center table-bordered">
-
                 <thead>
                 <tr>
                     <th>Id</th>
-                    <th>username</th>
-                    <th>password</th>
-                    <th>sexe</th>
-                    <th>adresse</th>
-                    <th>tel</th>
-                    <th>email</th>
-                    <th>type</th>
+                    <th>Marque</th>
+                    <th>Catégorie</th>
+                    <th>Prix</th>
+                    <th>Description</th>
+                    <th>Quantité</th>
+                    <th>Date</th>
                     <th>Action</th>
                 </tr>
                 </thead>
 
                 <tbody>
 
-                <tr th:each="utilisateur : ${utilisateurs}">
-                    <td th:text="${utilisateur.id}"></td>
-                    <td th:text="${utilisateur.username}"></td>
-                    <td th:text="${utilisateur.password}"></td>
-                    <td th:text="${utilisateur.sexe}"></td>
-                    <td th:text="${utilisateur.adresse}"></td>
-                    <td th:text="${utilisateur.tel}"></td>
-                    <td th:text="${utilisateur.email}"></td>
-                    <td th:text="${utilisateur.Type}"></td>
+                <tr th:each="produit : ${produits}">
+                    <td th:text="${produit.id}"></td>
+                    <td th:text="${produit.marque}"></td>
+                    <td th:text="${produit.categorie}"></td>
+                    <td th:text="${produit.prix}"></td>
+                    <td th:text="${produit.description}"></td>
+                    <td th:text="${produit.quantityProduct}"></td>
+                    <td th:text="${produit.date}"></td>
                     <td>
-                        <a th:href="@{/user/delete/{id}(id=${utilisateur.id})}" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">
+                        <a th:href="@{/produits/delete/{id}(id=${produit.id})}" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce produit ?')">
                             <i class="bi bi-trash"></i>
                         </a>
                     </td>
@@ -263,7 +239,7 @@
     </div>
 
 
-    </div>
+</div>
 </div>
 
 
