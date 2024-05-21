@@ -15,6 +15,8 @@ import com.example.Odooraa.Service.UserService;
 import com.example.Odooraa.entities.Produit;
 import com.example.Odooraa.entities.UserSite;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class FavorisController {
 
@@ -34,36 +36,41 @@ public class FavorisController {
     }
 
     @GetMapping("/favoris")
-    public String listFavoris(Model model) {
-        model.addAttribute("listFavoris", favorisService.getAllFavoriss());
-        System.out.print("jjjjjjj");
-        int nombreProduits = 0;
-        int nombreFavoris = 0;
-        UserSite user = userService.getUserById(1L);
-        nombreProduits = user.getPanier().getProduits().size();
-        model.addAttribute("nombreProduits", nombreProduits);
-        System.out.println("hhhhhhhhhhhhh" + nombreProduits);
-        float totalPrice = 0;
-        for (Produit product : user.getPanier().getProduits()) {
-            totalPrice += product.getPrix();
+    public String listFavoris(Model model, HttpSession session) {
+        if (session.getAttribute("user") != null) {
+            UserSite userSession = (UserSite) session.getAttribute("user");
+            model.addAttribute("listFavoris", favorisService.getAllFavoriss());
+            System.out.print("jjjjjjj");
+            int nombreProduits = 0;
+            int nombreFavoris = 0;
+            UserSite user = userService.getUserById(userSession.getId());
+            nombreProduits = user.getPanier().getProduits().size();
+            model.addAttribute("nombreProduits", nombreProduits);
+            System.out.println("hhhhhhhhhhhhh" + nombreProduits);
+            float totalPrice = 0;
+            for (Produit product : user.getPanier().getProduits()) {
+                totalPrice += product.getPrix();
+            }
+            nombreFavoris = user.getFavoris().getProduits().size();
+            model.addAttribute("nombreFavoris", nombreFavoris);
         }
-        nombreFavoris = user.getFavoris().getProduits().size();
-        model.addAttribute("nombreFavoris", nombreFavoris);
 
         return "favoris";
     }
 
     @GetMapping("/deleteProductFavoris/{productId}")
-    public String deleteProductFromCart(@PathVariable Long productId) {
-        favorisService.removeProductFromCart(productId, 1L);
+    public String deleteProductFromCart(@PathVariable Long productId, HttpSession session) {
+        UserSite userSession = (UserSite) session.getAttribute("user");
+        favorisService.removeProductFromCart(productId, userSession.getId());
 
         return "redirect:/check";
     }
 
     @PostMapping("/addToPanier")
-    public String addToCart(@RequestParam Long productId) {
+    public String addToCart(@RequestParam Long productId, HttpSession session) {
         Produit produit = produitService.getProduitById(productId);
-        panierService.ajouterProduitAuPanier(1L, produit);
+        UserSite userSession = (UserSite) session.getAttribute("user");
+        panierService.ajouterProduitAuPanier(userSession.getId(), produit);
         favorisService.removeProductFromCart(productId, 1L);
         return "redirect:/favoris"; // Redirect to cart or any other page
     }

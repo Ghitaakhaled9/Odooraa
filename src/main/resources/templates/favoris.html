@@ -181,7 +181,7 @@
                             <form action="/addToPanier" method="post">
                                 <div th:each="favoris: ${listFavoris}">
                                     <tr th:each="produit : ${favoris.produits}" class="product">
-                                        <td><img src="img/perfume1.jpg" class="productimg" alt=""></td>
+                                        <td><img th:src="${produit.imageUrl}" alt="" class="productimg"></td>
                                         <td th:text="${produit.marque}" class="productBrand"></td>
                                         <td id="productPrice" th:text="${produit.prix}"></td>
                                         <td>
