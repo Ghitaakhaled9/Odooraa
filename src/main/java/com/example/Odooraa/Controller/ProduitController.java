@@ -43,7 +43,8 @@ public class ProduitController {
             @RequestParam("prix") double prix,
             @RequestParam("description") String description,
             @RequestParam("quantite") int quantite,
-            @RequestParam("date1") String dateString
+            @RequestParam("date1") String dateString,
+            @RequestParam("imageFile") String imageUrl
     ) {
         LocalDate date = null;
 
@@ -68,6 +69,7 @@ public class ProduitController {
         } else {
             produit.setDate("Date inconnue"); // Valeur par défaut en cas de problème
         }
+        produit.setImageUrl(imageUrl);
 
         produitRepository.save(produit);
 

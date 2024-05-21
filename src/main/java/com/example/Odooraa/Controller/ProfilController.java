@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ProfilController {
 
-    @GetMapping("/profile")
+    @GetMapping("/profil")
     public String showProfileClientPage(Model model, HttpSession session) {
-
         if (session.getAttribute("user") != null) {
-
             UserSite user = (UserSite) session.getAttribute("user");
             model.addAttribute("username", user.getUsername());
             model.addAttribute("email", user.getEmail());
@@ -21,7 +19,6 @@ public class ProfilController {
             model.addAttribute("adresse", user.getAdresse());
             model.addAttribute("tel", user.getTel());
         }
-
         return "profil";
     }
 }

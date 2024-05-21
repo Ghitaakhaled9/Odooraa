@@ -17,7 +17,7 @@ public class singleProductController {
     public singleProductController(ProduitRepository produitRepository) {
         this.produitRepository = produitRepository;
     }
-    
+
     @GetMapping("/single/{id}") // Add path variable for product ID
     public String showSingleProductPage(@PathVariable Long id, Model model) {
         Produit produit = produitRepository.findById(id).orElse(null);
@@ -27,7 +27,7 @@ public class singleProductController {
             return "single"; // Return the view name for the single product page
         } else {
             // Handle the case where the product is not found
-            return "productNotFound"; // Assuming you have a view named "productNotFound"
+            return "error"; // Assuming you have a view named "productNotFound"
         }
     }
     
