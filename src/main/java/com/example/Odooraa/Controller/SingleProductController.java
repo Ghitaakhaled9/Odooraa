@@ -18,7 +18,7 @@ public class SingleProductController {
         this.produitRepository = produitRepository;
     }
 
-    @GetMapping("/single_product/{id}")
+    @GetMapping("/single/{id}")
     public String showSingleProductPage(@PathVariable Long id, Model model) {
         Produit produit = produitRepository.findById(id).orElse(null);
 
@@ -29,4 +29,4 @@ public class SingleProductController {
             return "productNotFound"; // Ensure you have a view named "productNotFound"
         }
     }
-}git
+}
