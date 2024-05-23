@@ -1053,6 +1053,14 @@ modal
 	width: 100%;
 	margin-top: 57px;
 }
+.product-grid img 
+{
+	
+		width: 100%; /* Ensures image fills its container */
+		height: 200px; /* Set a fixed height for all images */
+		object-fit: cover; /* Maintains aspect ratio while filling the container */
+	
+}
 .product-item
 {
 	width: 20%;

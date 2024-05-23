@@ -269,10 +269,10 @@
                                 <div class="product_info">
                                     <h6 class="product_name">
                                         <a  th:href="@{'/single/' + ${product.id}}" class="show-details"
-                                            th:data-name="${product.description}"
+                                            th:data-name="${product.name}"
                                             th:data-price="${product.prix}"
                                             th:data-image="${product.imageUrl}">
-                                            <span th:text="${product.description}">Product Description</span>
+                                            <span th:text="${product.name}">Product Description</span>
                                             </a>
 
                                     </h6>

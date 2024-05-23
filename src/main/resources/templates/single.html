@@ -126,7 +126,12 @@
 					<div class="breadcrumbs d-flex flex-row align-items-center">
 						<ul>
 							<li><a href="/index">Home</a></li>
-							<li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+							<li>
+								<a href="#" th:text="${product.categorie == 'Men'} ? 'Men\'s' : 'Women\'s'">
+									<i class="fa fa-angle-right" aria-hidden="true"></i> 
+									<!-- This text will be replaced by the th:text attribute -->
+								</a>
+							</li>
 							<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a></li>
 						</ul>
 					</div>
@@ -141,17 +146,19 @@
 							<div class="col-lg-3 thumbnails_col order-lg-1 order-2">
 								<div class="single_product_thumbnails">
 									<ul>
-										<li><img  th:src="${product.imageUrl}" alt="" data-image="img/single_1.jpg"></li>
-										<li class="active"><img th:src="${product.imageUrl}" alt="" data-image="img/single_2.jpg"></li>
-										<li><img th:src="${product.imageUrl}" alt="" data-image="img/single_3.jpg"></li>
+										
+										<li class="active"><img th:src="${product.imageUrl}" alt="" data-image="${product.imageUrl}"></li>
+									
 									</ul>
 								</div>
 							</div>
 							<div class="col-lg-9 image_col order-lg-2 order-1">
 								<div class="single_product_image">
-									<div class="single_product_image_background" style="background-image:url(/static/img/single_2.jpg)"></div>
+									<div class="single_product_image_background" 
+										 th:style="'background-image:url(' + ${product.imageUrl} + ')'"></div>
 								</div>
 							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -159,7 +166,8 @@
 				<div class="col-lg-5">
 					<div class="product_details">
 						<div class="product_details_title">
-							<h2 th:text="${product.marque}">Delicate Jasmine Perfume</h2>
+							<h2 th:text="${product.name}">Delicate Jasmine Perfume</h2>
+							<h3 th:text="${product.marque}">Delicate Jasmine Perfume</h3>
 							<p th:text="${product.description}">A mesmerizing blend of jasmine and citrus notes, this perfume is perfect for any occasion. Its enchanting aroma will leave you feeling refreshed and confident all day long.</p>
 						</div>
 						<div class="free_delivery d-flex flex-row align-items-center justify-content-center">
@@ -182,7 +190,7 @@
 								<span id="quantity_value">1</span>
 								<span class="plus"><i class="fa fa-plus" aria-hidden="true"></i></span>
 							</div>
-							<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+							<div class="red_button add_to_cart_button"><a href="">add to cart</a></div>
 							<div class="product_favorite d-flex flex-column align-items-center justify-content-center"></div>
 						</div>
 					</div>
