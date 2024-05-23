@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-	
+
 
 <head>
 	<title>Odora</title>
@@ -36,14 +36,41 @@
 					<div class="col-md-6 text-right">
 						<div class="top_nav_right">
 							<ul class="top_nav_menu">
+
+								<!-- Currency / Language / My Account -->
+
+								<li class="currency">
+									<a href="#">
+										MAD
+										<i class="fa fa-angle-down"></i>
+									</a>
+									<ul class="currency_selection">
+										<li><a href="#">usd</a></li>
+										<li><a href="#">aud</a></li>
+										<li><a href="#">eur</a></li>
+										<li><a href="#">gbp</a></li>
+									</ul>
+								</li>
+								<li class="language">
+									<a href="#">
+										English
+										<i class="fa fa-angle-down"></i>
+									</a>
+									<ul class="language_selection">
+										<li><a href="#">French</a></li>
+										<li><a href="#">Italian</a></li>
+										<li><a href="#">German</a></li>
+										<li><a href="#">Spanish</a></li>
+									</ul>
+								</li>
 								<li class="account">
 									<a href="#">
 										My Account
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-										<li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-										<li><a href="/inscription"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+										<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+										<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -60,16 +87,18 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="/index">ODO<span>RA</span></a>
+							<a href="#">ODO<span>RA</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
 								<li><a href="#">home</a></li>
 								<li><a href="#">femme</a></li>
 								<li><a href="#">homme</a></li>
-								<li><a href="#">contact</a></li>
+								<li><a href="contact.html">contact</a></li>
 							</ul>
 							<ul class="navbar_user">
+								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 								<li class="checkout">
 									<a href="#">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -95,12 +124,36 @@
 			<ul class="menu_top_nav">
 				<li class="menu_item has-children">
 					<a href="#">
+						usd
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="menu_selection">
+						<li><a href="#">cad</a></li>
+						<li><a href="#">aud</a></li>
+						<li><a href="#">eur</a></li>
+						<li><a href="#">gbp</a></li>
+					</ul>
+				</li>
+				<li class="menu_item has-children">
+					<a href="#">
+						English
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="menu_selection">
+						<li><a href="#">French</a></li>
+						<li><a href="#">Italian</a></li>
+						<li><a href="#">German</a></li>
+						<li><a href="#">Spanish</a></li>
+					</ul>
+				</li>
+				<li class="menu_item has-children">
+					<a href="#">
 						My Account
 						<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="menu_selection">
-						<li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-						<li><a href="/inscription"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+						<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+						<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
 					</ul>
 				</li>
 				<li class="menu_item"><a href="#">home</a></li>
@@ -111,13 +164,19 @@
 		</div>
 	</div>
 
+	<!-- Slider -->
+
+
 	<div>
 		<video autoplay loop muted poster class="fullscreen-video">
 			<source src="img/vid/17.mp4" type="video/mp4">
 		</video>
 	</div>
 
-	<div class="hero_vid" style="background-image:url(/static/img/banner_1.jpg); background-size: cover;">
+
+
+
+	<div class="hero_vid" style="background-image:url(img/slider_1.jpg); background-size: cover;">
 		<div class="container fill_height">
 			<div class="row align-items-center fill_height">
 				<div class="col">
@@ -130,21 +189,21 @@
 			</div>
 		</div>
 	</div>
-	
+
 
 	<div class="banner">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<div class="banner_item align-items-center" style="background-image:url(/img/banner_1.jpg)">
+					<div class="banner_item align-items-center" style="background-image:url(img/banner_1.jpg)">
 						<div class="banner_category">
 							<a href="categories.html">women's</a>
 						</div>
 					</div>
 				</div>
-	
+
 				<div class="col-md-4">
-					<div class="banner_item align-items-center" style="background-image:url(/img/banner_3.jpg)">
+					<div class="banner_item align-items-center" style="background-image:url(img/banner_3.jpg)">
 						<div class="banner_category">
 							<a href="categories.html">men's</a>
 						</div>
@@ -153,85 +212,85 @@
 			</div>
 		</div>
 	</div>
-	
 
-<!-- New Arrivals -->
-<div class="new_arrivals">
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <div class="section_title new_arrivals_title">
-                    <h2>New Arrivals</h2>
-                </div>
-            </div>
-        </div>
 
-        <div class="row align-items-center">
-            <div class="col text-center">
-                <div class="new_arrivals_sorting">
-                    <ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
-                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">all</li>
-                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">women's</li>
-                        <li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">men's</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+	<!-- New Arrivals -->
+	<div class="new_arrivals">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="section_title new_arrivals_title">
+						<h2>New Arrivals</h2>
+					</div>
+				</div>
+			</div>
 
-        <!-- Price range filter -->
-        <div class="row align-items-center">
-            <div class="col-md-6 offset-md-3 text-center">
-                <div class="input-group mb-3">
-                    <span class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked input-group-text">Filter by Price :</span>
-                    <input type="number" id="min-price" class="form-control" placeholder="Min Price">
-                    <input type="number" id="max-price" class="form-control" placeholder="Max Price">
-                    <button class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" type="button" onclick="filterByPrice()">Apply</button>
-                </div>
-            </div>
-        </div>
+			<div class="row align-items-center">
+				<div class="col text-center">
+					<div class="new_arrivals_sorting">
+						<ul class="arrivals_grid_sorting clearfix button-group filters-button-group">
+							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" data-filter="*">all</li>
+							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".women">women's</li>
+							<li class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center" data-filter=".men">men's</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 
-      
-        <div class="row">
-            <div class="col">
-                <div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
-        
-                    <!-- Loop through products -->
-                    <div th:each="product : ${products}">
-                        <!-- Product Item -->
-                         <div class="product-item" th:classappend="${product.categorie == 'Men'} ? 'men' : 'women'">
-                            <div class="product discount product_filter">
-                                <div class="product_image">
-                                    <img th:src="${product.imageUrl}" alt="">
-                                </div>
-                                <div class="favorite favorite_left"></div>
-                                <div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
-                                    <span th:text="'$' + ${product.prix}">$0</span>
-                                </div>
-                                <div class="product_info">
-                                    <h6 class="product_name">
-                                        <a  th:href="@{'/single/' + ${product.id}}" class="show-details"
-                                            th:data-name="${product.description}"
-                                            th:data-price="${product.prix}"
-                                            th:data-image="${product.imageUrl}">
-                                            <span th:text="${product.description}">Product Description</span>
-                                            </a>
+			<!-- Price range filter -->
+			<div class="row align-items-center">
+				<div class="col-md-6 offset-md-3 text-center">
+					<div class="input-group mb-3">
+						<span class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked input-group-text">Filter by Price :</span>
+						<input type="number" id="min-price" class="form-control" placeholder="Min Price">
+						<input type="number" id="max-price" class="form-control" placeholder="Max Price">
+						<button class="grid_sorting_button button d-flex flex-column justify-content-center align-items-center active is-checked" type="button" onclick="filterByPrice()">Apply</button>
+					</div>
+				</div>
+			</div>
 
-                                    </h6>
-                                    <div class="product_price">
-                                        <div th:text="'$' + ${product.prix}"></div> 
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
-                        </div>
-                    </div>
-        
-                </div>
-            </div>
-        </div>
-        
-    </div>
-</div>
+
+			<div class="row">
+				<div class="col">
+					<div class="product-grid" data-isotope='{ "itemSelector": ".product-item", "layoutMode": "fitRows" }'>
+
+						<!-- Loop through products -->
+						<div th:each="product : ${products}">
+							<!-- Product Item -->
+							<div class="product-item" th:classappend="${product.categorie == 'Men'} ? 'men' : 'women'">
+								<div class="product discount product_filter">
+									<div class="product_image">
+										<img th:src="${product.imageUrl}" alt="">
+									</div>
+									<div class="favorite favorite_left"></div>
+									<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center">
+										<span th:text="'$' + ${product.prix}">$0</span>
+									</div>
+									<div class="product_info">
+										<h6 class="product_name">
+											<a  th:href="@{'/single/' + ${product.id}}" class="show-details"
+												th:data-name="${product.description}"
+												th:data-price="${product.prix}"
+												th:data-image="${product.imageUrl}">
+												<span th:text="${product.description}">Product Description</span>
+											</a>
+
+										</h6>
+										<div class="product_price">
+											<div th:text="'$' + ${product.prix}"></div>
+										</div>
+									</div>
+								</div>
+								<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
 
 
 
@@ -292,6 +351,9 @@
 				<div class="col">
 					<div class="product_slider_container">
 						<div class="owl-carousel owl-theme product_slider">
+
+							<!-- Slide 1 -->
+
 							<div class="owl-item product_slider_item">
 								<div class="product-item">
 									<div class="product discount">
@@ -325,6 +387,8 @@
 									</div>
 								</div>
 							</div>
+
+							<!-- Slide 3 -->
 
 							<div class="owl-item product_slider_item">
 								<div class="product-item women">
@@ -404,7 +468,7 @@
 										</div>
 										<div class="favorite"></div>
 										<div class="product_info">
-											<h6 class="product_name"><a href="single.html">parfum</a></h6>
+											<h6 class="product_name"><a href="single.html">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h6>
 											<div class="product_price">$610.00</div>
 										</div>
 									</div>
@@ -421,7 +485,7 @@
 										</div>
 										<div class="favorite"></div>
 										<div class="product_info">
-											<h6 class="product_name"><a href="single.html">parfum</a></h6>
+											<h6 class="product_name"><a href="single.html">Blue Yeti USB Microphone Blackout Edition</a></h6>
 											<div class="product_price">$120.00</div>
 										</div>
 									</div>
@@ -439,7 +503,7 @@
 										<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>sale</span></div>
 										<div class="favorite favorite_left"></div>
 										<div class="product_info">
-											<h6 class="product_name"><a href="single.html">parfum</a></h6>
+											<h6 class="product_name"><a href="single.html">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h6>
 											<div class="product_price">$410.00</div>
 										</div>
 									</div>
@@ -452,11 +516,11 @@
 								<div class="product-item men">
 									<div class="product">
 										<div class="product_image">
-											<img src="img/product_10.png" alt="">
+											<img src="images/product_10.png" alt="">
 										</div>
 										<div class="favorite"></div>
 										<div class="product_info">
-											<h6 class="product_name"><a href="single.html">parfum</a></h6>
+											<h6 class="product_name"><a href="single.html">Pryma Headphones, Rose Gold & Grey</a></h6>
 											<div class="product_price">$180.00</div>
 										</div>
 									</div>
@@ -535,7 +599,7 @@
 						<ul class="footer_nav">
 
 							<li><a href="#">FAQs</a></li>
-							<li><a href="#">Contact us</a></li>
+							<li><a href="contact.html">Contact us</a></li>
 						</ul>
 					</div>
 				</div>

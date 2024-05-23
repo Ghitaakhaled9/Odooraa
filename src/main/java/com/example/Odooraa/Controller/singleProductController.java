@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.example.Odooraa.Repository.ProduitRepository;
 import com.example.Odooraa.entities.Produit;
 
+import java.util.Optional;
+
 @Controller
 public class singleProductController {
 
@@ -20,10 +22,9 @@ public class singleProductController {
 
     @GetMapping("/single/{id}") // Add path variable for product ID
     public String showSingleProductPage(@PathVariable Long id, Model model) {
-        Produit produit = produitRepository.findById(id).orElse(null);
-        
-        if (produit != null) {
-            model.addAttribute("product", produit);
+        Produit product = produitRepository.findById(id).orElse(null);
+        if (product != null) {
+            model.addAttribute("product", product);
             return "single"; // Return the view name for the single product page
         } else {
             // Handle the case where the product is not found
