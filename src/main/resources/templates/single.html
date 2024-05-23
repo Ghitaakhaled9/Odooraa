@@ -6,15 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="Colo Shop Template">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
-<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
-<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
-<link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
-<link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="styles/single_styles.css">
-<link rel="stylesheet" type="text/css" href="styles/single_responsive.css">
+<link rel="stylesheet" type="text/css" href="/styles/bootstrap4/bootstrap.min.css" th:href="@{/styles/bootstrap4/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" />
+<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}" />
+<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}" />
+<link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css" th:href="@{/plugins/OwlCarousel2-2.2.1/animate.css}" />
+<link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css" th:href="@{/plugins/themify-icons/themify-icons.css}" />
+<link rel="stylesheet" type="text/css" href="/plugins/jquery-ui-1.12.1.custom/jquery-ui.css" th:href="@{/plugins/jquery-ui-1.12.1.custom/jquery-ui.css}" />
+<link rel="stylesheet" type="text/css" href="/styles/single_styles.css" th:href="@{/styles/single_styles.css}" />
+<link rel="stylesheet" type="text/css" href="/styles/single_responsive.css" th:href="@{/styles/single_responsive.css}" />
+
 </head>
 
 <body>
@@ -37,14 +38,40 @@
 						<div class="top_nav_right">
 							<ul class="top_nav_menu">
 
+								
+
+								<li class="currency">
+									<a href="#">
+										usd
+										<i class="fa fa-angle-down"></i>
+									</a>
+									<ul class="currency_selection">
+										<li><a href="#">cad</a></li>
+										<li><a href="#">aud</a></li>
+										<li><a href="#">eur</a></li>
+										<li><a href="#">gbp</a></li>
+									</ul>
+								</li>
+								<li class="language">
+									<a href="#">
+										English
+										<i class="fa fa-angle-down"></i>
+									</a>
+									<ul class="language_selection">
+										<li><a href="#">French</a></li>
+										<li><a href="#">Italian</a></li>
+										<li><a href="#">German</a></li>
+										<li><a href="#">Spanish</a></li>
+									</ul>
+								</li>
 								<li class="account">
 									<a href="#">
 										My Account
 										<i class="fa fa-angle-down"></i>
 									</a>
 									<ul class="account_selection">
-										<li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-										<li><a href="inscription.html"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+										<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+										<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -61,17 +88,18 @@
 				<div class="row">
 					<div class="col-lg-12 text-right">
 						<div class="logo_container">
-							<a href="/index">ODO<span>RA</span></a>
+							<a href="#">ODO<span>RA</span></a>
 						</div>
 						<nav class="navbar">
 							<ul class="navbar_menu">
-								<li><a href="/index">home</a></li>
+								<li><a href="index.html">home</a></li>
 								<li><a href="#">shop</a></li>
 								
-								<li><a href="#">contact</a></li>
+								<li><a href="contact.html">contact</a></li>
 							</ul>
 							<ul class="navbar_user">
-								<li><a href="/profil"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 								<li class="checkout">
 									<a href="#">
 										<i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -100,6 +128,30 @@
 			<ul class="menu_top_nav">
 				<li class="menu_item has-children">
 					<a href="#">
+						usd
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="menu_selection">
+						<li><a href="#">cad</a></li>
+						<li><a href="#">aud</a></li>
+						<li><a href="#">eur</a></li>
+						<li><a href="#">gbp</a></li>
+					</ul>
+				</li>
+				<li class="menu_item has-children">
+					<a href="#">
+						English
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="menu_selection">
+						<li><a href="#">French</a></li>
+						<li><a href="#">Italian</a></li>
+						<li><a href="#">German</a></li>
+						<li><a href="#">Spanish</a></li>
+					</ul>
+				</li>
+				<li class="menu_item has-children">
+					<a href="#">
 						My Account
 						<i class="fa fa-angle-down"></i>
 					</a>
@@ -108,7 +160,7 @@
 						<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
 					</ul>
 				</li>
-				<li class="menu_item"><a href="/index">home</a></li>
+				<li class="menu_item"><a href="#">home</a></li>
 				<li class="menu_item"><a href="#">shop</a></li>
 				
 				<li class="menu_item"><a href="#">contact</a></li>
@@ -124,8 +176,8 @@
 
 				<div class="breadcrumbs d-flex flex-row align-items-center">
 					<ul>
-						<li><a href="/index">Home</a></li>
-						<li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="categories.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
 						<li class="active"><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i>Single Product</a></li>
 					</ul>
 				</div>
@@ -148,7 +200,7 @@
 						</div>
 						<div class="col-lg-9 image_col order-lg-2 order-1">
 							<div class="single_product_image">
-								<div class="single_product_image_background" style="background-image:url(/static/img/single_2.jpg)"></div>
+								<div class="single_product_image_background" style="background-image:url(img/single_2.jpg)"></div>
 							</div>
 						</div>
 					</div>
@@ -248,7 +300,7 @@
 						<ul class="footer_nav">
 							<li><a href="#">Blog</a></li>
 							<li><a href="#">FAQs</a></li>
-							<li><a href="#">Contact us</a></li>
+							<li><a href="contact.html">Contact us</a></li>
 						</ul>
 					</div>
 				</div>
@@ -276,14 +328,15 @@
 
 </div>
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="js/single_custom.js"></script>
+<script src="/js/jquery-3.2.1.min.js" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script src="/styles/bootstrap4/popper.js" th:src="@{/styles/bootstrap4/popper.js}"></script>
+<script src="/styles/bootstrap4/bootstrap.min.js" th:src="@{/styles/bootstrap4/bootstrap.min.js}"></script>
+<script src="/plugins/Isotope/isotope.pkgd.min.js" th:src="@{/plugins/Isotope/isotope.pkgd.min.js}"></script>
+<script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js" th:src="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
+<script src="/plugins/easing/easing.js" th:src="@{/plugins/easing/easing.js}"></script>
+<script src="/plugins/jquery-ui-1.12.1.custom/jquery-ui.js" th:src="@{/plugins/jquery-ui-1.12.1.custom/jquery-ui.js}"></script>
+<script src="/js/single_custom.js" th:src="@{/js/single_custom.js}"></script>
+
 </body>
 
 </html>
