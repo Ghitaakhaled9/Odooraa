@@ -38,6 +38,10 @@ public class ProduitService {
         return null;
     }
 
+    public List<Produit> getTopBestSellingProducts(int limit) {
+        return produitRepository.findTopBestSellingProducts(limit);
+    }
+
     public void deleteProduit(Long id) {
         produitRepository.deleteById(id);
     }

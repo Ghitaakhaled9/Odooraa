@@ -13,8 +13,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
-
 @Controller
 public class ProduitController {
 
@@ -38,6 +36,7 @@ public class ProduitController {
 
     @PostMapping("/produits/add")
     public String ajouterProduit(
+            @RequestParam("name") String name,
             @RequestParam("marque") String marque,
             @RequestParam("categorie") String categorie,
             @RequestParam("prix") double prix,
@@ -57,6 +56,7 @@ public class ProduitController {
         }
 
         Produit produit = new Produit();
+        produit.setName(name);
         produit.setMarque(marque);
         produit.setCategorie(categorie);
         produit.setPrix(prix);

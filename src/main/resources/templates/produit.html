@@ -140,6 +140,10 @@
             <div class="flex-container">
                 <div class="inputField">
                     <div>
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" required>
+                    </div>
+                    <div>
                         <label for="marque">Marque:</label>
                         <input type="text" name="marque" id="marque" required>
                     </div>
@@ -180,6 +184,7 @@
                 <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Name</th>
                     <th>Marque</th>
                     <th>Catégorie</th>
                     <th>Prix</th>
@@ -194,6 +199,7 @@
                 <!-- Boucle sur les produits passés par le contrôleur -->
                 <tr th:each="produit : ${produits}">
                     <td th:text="${produit.id}"></td>
+                    <td th:text="${produit.name}"></td>
                     <td th:text="${produit.marque}"></td>
                     <td th:text="${produit.categorie}"></td>
                     <td th:text="${produit.prix}"></td>
@@ -228,9 +234,14 @@
                         <!-- Formulaire de modification du produit -->
                         <form id="editProductForm">
                             <div class="form-group">
+                                <label for="name1">Name:</label>
+                                <input type="text" name="name1" id="name1" class="form-control" required>
+                            </div>
+                            <div class="form-group">
                                 <label for="marque1">Marque:</label>
                                 <input type="text" name="marque1" id="marque1" class="form-control" required>
                             </div>
+
                             <div class="form-group">
                                 <label for="categorie1">Catégorie:</label>
                                 <input type="text" name="categorie1" id="categorie1" class="form-control" required>

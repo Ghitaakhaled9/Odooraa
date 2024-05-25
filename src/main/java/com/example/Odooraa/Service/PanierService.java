@@ -76,5 +76,14 @@ public class PanierService {
 
         panierRepository.save(panier);
     }
+    public void ajouterProduitAuPanierLongPram(Long panierId, Long produitid) {
+        Panier panier = panierRepository.findById(panierId).orElseThrow(() -> new RuntimeException("Panier non trouvé"));
+        Produit produit = produitRepository.findById(produitid).orElseThrow(() -> new RuntimeException("Produit non trouvé"));;
+
+
+        panier.getProduits().add(produit);
+
+        panierRepository.save(panier);
+    }
 
 }
