@@ -67,8 +67,8 @@
                             <li class="account">
                                 <a href="#">My Account <i class="fa fa-angle-down"></i></a>
                                 <ul class="account_selection">
-                                    <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-                                    <li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
+                                    <li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
+                                    <li><a href="/inscription"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -94,7 +94,7 @@
                                
                             </li>
                            
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="/contact">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -123,7 +123,7 @@
                     <div class="breadcrumb__text">
                         <h2>Chekout</h2>
                         <div class="breadcrumb__option">
-                            <a href="./index.html">Home</a>
+                            <a href="/index">Home</a>
                             <span>Chekout</span>
                         </div>
                     </div>
@@ -217,18 +217,17 @@
                         </div>
                         <div class="col-lg-4 col-md-6">
                              <div class="checkout__order">
-        <h4>Your Order</h4>
-        <div class="checkout__order__subtotal" >Subtotal <span id="subtotalValue" th:text="${subtotal}"></span></div>
-        <div class="checkout__order__total">Total <span id="totalValue" th:text="${total}"></span></div>
-        <div class="checkout__input__checkbox">
-            <label for="acc-or">
-                Create an account?
-                <input type="checkbox" id="acc-or">
-                <span class="checkmark"></span>
-            </label>
-        </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua.</p>
+                        <h4>Your Order</h4>
+                                 <div class="checkout__order__subtotal" >Subtotal <span id="subtotalValue" th:text="${subtotal}"></span></div>
+                                 <div class="checkout__order__total">Total <span id="totalValue" th:text="${total}"></span></div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="acc-or">
+                                    Create an account?
+                                    <input type="checkbox" id="acc-or">
+                                    <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
                                         Check Payment

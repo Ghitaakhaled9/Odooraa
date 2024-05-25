@@ -61,8 +61,8 @@ div
 	display: block;
 	position: relative;
 	-webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 ul
 {
@@ -1333,10 +1333,12 @@ section
 .product_image
 {
 	width: 100%;
+
 }
 .product_image img
 {
 	width: 100%;
+	height: 200px;
 }
 .product_info
 {
