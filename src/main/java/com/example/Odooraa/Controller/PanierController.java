@@ -40,11 +40,13 @@ public class PanierController {
     public String listPanier(Model model, HttpSession session) {
         if (session.getAttribute("user") != null) {
             UserSite userSession = (UserSite) session.getAttribute("user");
-            model.addAttribute("listPanier", panierService.getAllPaniers());
+            UserSite user = userService.getUserById(userSession.getId());
+            Panier panierSession = user.getPanier();
+            model.addAttribute("listPanier", panierSession.getProduits());
             System.out.print("jjjjjjj");
             int nombreProduits = 0;
             int nombreFavoris = 0;
-            UserSite user = userService.getUserById(userSession.getId());
+
             nombreProduits = user.getPanier().getProduits().size();
             model.addAttribute("nombreProduits", nombreProduits);
             System.out.println("hhhhhhhhhhhhh" + nombreProduits);
@@ -111,7 +113,8 @@ public class PanierController {
     @GetMapping("/deleteProduct/{productId}")
     public String deleteProductFromCart(@PathVariable Long productId, HttpSession session) {
         UserSite userSession = (UserSite) session.getAttribute("user");
-        panierService.removeProductFromCart(productId, userSession.getId());
+        UserSite user = userService.getUserById(userSession.getId());
+        panierService.removeProductFromCart(productId, user.getPanier().getId());
 
         return "redirect:/oriPanier";
     }
@@ -119,7 +122,7 @@ public class PanierController {
     /*
      * @GetMapping("/")
      * public String nombreProduitsPanier(Model model) {
-     * 
+     *
      * Utilisateur utilisateurConnecte =
      * utilisateurService.getUtilisateurConnecte();
      * int nombreProduits = 0;
