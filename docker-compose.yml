@@ -4,7 +4,7 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_ROOT_PASSWORD=
       - MYSQL_DATABASE=odora
       - MYSQL_USER=user
       - MYSQL_PASSWORD=userpassword
