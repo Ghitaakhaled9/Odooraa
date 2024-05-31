@@ -67,7 +67,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>Odooraa</finalName>
+		
 	</build>
 
 </project>
