@@ -1,5 +1,5 @@
 FROM openjdk:17
+WORKDIR /app
+COPY /target/Odooraa-0.0.1-SNAPSHOT.jar /app
 EXPOSE 8083
-ADD target/Odooraa.jar Odooraa.jar
-ENTRYPOINT ["java","-jar","/Odooraa.jar"]
-CMD ["-start"]
+CMD ["java", "-jar", "Odooraa-0.0.1-SNAPSHOT.jar"]
