@@ -4,7 +4,7 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ROOT_PASSWORD=rootpassword
       - MYSQL_DATABASE=odora
       - MYSQL_USER=user
       - MYSQL_PASSWORD=userpassword
@@ -27,7 +27,7 @@ services:
     environment:
       - DATABASE_URL=jdbc:mysql://shopdb:3306/odora?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
       - DATABASE_USER=root
-      - DATABASE_PASSWORD=rootpassword
+      - DATABASE_PASSWORD=
     ports:
       - "8083:8083"
     networks:
