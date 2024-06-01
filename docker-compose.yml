@@ -27,7 +27,7 @@ services:
     environment:
       - DATABASE_URL=jdbc:mysql://shopdb:3306/odora?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
       - DATABASE_USER=root
-      - DATABASE_PASSWORD=
+      - DATABASE_PASSWORD=rootpassword
     ports:
       - "8083:8083"
     networks:
